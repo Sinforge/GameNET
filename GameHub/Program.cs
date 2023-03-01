@@ -15,6 +15,8 @@ app.UseAuthentication();
 app.UseAuthorization();
 app.UseDeveloperExceptionPage();
 
+
+
 app.MapGet("/registration/{userId}/{userName}/{password}/{email}",
     async (HttpContext context ,ApplicationContext db, string userId, string userName,string password, string email) =>
 {
@@ -24,13 +26,15 @@ app.MapGet("/registration/{userId}/{userName}/{password}/{email}",
         await context.Response.WriteAsync("User with same id or email is exist");
     }
 
-    db.Users.Add(new User
+    db.Add( new User
     {
         UserId = userId,
         Name = userName,
         Password = password,
-        Email = email
+        Email = email,
+        Role = "default"
     });
+    
     await db.SaveChangesAsync();
 });
 app.MapGet("/login/{userId}/{password}",
@@ -42,7 +46,11 @@ app.MapGet("/login/{userId}/{password}",
             await ctx.Response.WriteAsync("Incorrect userid or password");
         }
 
-        var claims = new List<Claim> { new Claim(ClaimTypes.Name, userId) };
+        var claims = new List<Claim>
+        {
+            new Claim(ClaimsIdentity.DefaultNameClaimType, userId),
+            new Claim(ClaimsIdentity.DefaultRoleClaimType, user.Role)
+        };
         ClaimsIdentity claimsIdentity = new ClaimsIdentity(claims, "Cookies");
         await ctx.SignInAsync("Cookies", new ClaimsPrincipal(claimsIdentity));
         await ctx.Response.WriteAsync("Successful login");
