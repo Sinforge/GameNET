@@ -32,10 +32,42 @@ app.MapGet("/registration/{userId}/{userName}/{password}/{email}",
         Name = userName,
         Password = password,
         Email = email,
-        Role = "default"
+        Role = Role.DefaultUser
     });
     
     await db.SaveChangesAsync();
+});
+
+app.MapGet("/article", async (HttpContext ctx, ApplicationContext db) =>
+{
+    var request = ctx.Request;
+    string message = "Bad request";
+    ArticleViewModel? json;
+    try
+    {
+        json = await request.ReadFromJsonAsync<ArticleViewModel>();
+
+        if (json != null)
+        {
+            Article article = new Article()
+            {
+                Title = json.Title,
+                Text = json.Text,
+                Owner = await db.Users.FirstOrDefaultAsync(u => u.UserId == json.Owner)
+            };
+            db.Articles.Add(article);
+            await db.SaveChangesAsync();
+            message = "Successful request";
+        }
+    }
+    catch (Exception ex)
+    { 
+        message = ex.Message;
+    }
+
+    await ctx.Response.WriteAsync(message);
+
+
 });
 app.MapGet("/login/{userId}/{password}",
     async (HttpContext ctx, ApplicationContext db, string userId, string password)=> 
