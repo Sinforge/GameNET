@@ -1,4 +1,4 @@
-﻿namespace GameHub.Models;
+﻿namespace AccountService.Models;
 
 public static class Role
 {

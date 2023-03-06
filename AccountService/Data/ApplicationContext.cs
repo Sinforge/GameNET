@@ -1,11 +1,11 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using AccountService.Models;
+using Microsoft.EntityFrameworkCore;
 
-namespace GameHub.Models
+namespace AccountService.Data
 {
     public class ApplicationContext : DbContext
     {
         public DbSet<User> Users { get; set; }
-        public DbSet<Article> Articles { get;set; }
         public ApplicationContext(DbContextOptions<ApplicationContext> options)
             : base(options)
         {

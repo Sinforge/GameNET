@@ -1,11 +1,17 @@
-﻿namespace GameHub.Models
+﻿using System.ComponentModel.DataAnnotations;
+
+namespace GameHub.Models
 {
     public class Article
     {
+        [Key]
         public int Id { get; set; }
-        public string Title { get; set; } = null!;
-        public string Text { get; set; } = null!;
 
+        [Required]
+        public string Title { get; set; } = null!;
+        [Required]
+        public string Text { get; set; } = null!;
+        [Required]
         public User? Owner { get; set; } = null!;
     }
 }

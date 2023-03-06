@@ -1,8 +1,8 @@
 version: '3.4'
 
 services:
-  gamehub:
-    image: ${DOCKER_REGISTRY-}gamehub
+  articleservice:
+    image: ${DOCKER_REGISTRY-}articleservice
     build:
       context: .
-      dockerfile: GameHub/Dockerfile
+      dockerfile: ArticleService/Dockerfile

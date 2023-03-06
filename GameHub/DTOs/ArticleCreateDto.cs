@@ -1,6 +1,6 @@
-﻿namespace GameHub.Models
+﻿namespace GameHub.DTOs
 {
-    public class ArticleViewModel
+    public class ArticleCreateDto
     {
         public string Title { get; set; } = null!;
         public string Text { get; set; } = null!;
