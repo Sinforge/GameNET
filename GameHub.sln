@@ -3,7 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.2.32616.157
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GameHub", "GameHub\GameHub.csproj", "{AB598DC3-53C4-4018-92F3-48F70C0E7DE9}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GameHub", "GameHub\GameHub.csproj", "{AB598DC3-53C4-4018-92F3-48F70C0E7DE9}"
+EndProject
+Project("{E53339B2-1760-4266-BCC7-CA923CBCF16C}") = "docker-compose", "docker-compose.dcproj", "{424D1D54-EFCC-478D-8B06-CBC752079FC1}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,6 +17,10 @@ Global
 		{AB598DC3-53C4-4018-92F3-48F70C0E7DE9}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{AB598DC3-53C4-4018-92F3-48F70C0E7DE9}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{AB598DC3-53C4-4018-92F3-48F70C0E7DE9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{424D1D54-EFCC-478D-8B06-CBC752079FC1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{424D1D54-EFCC-478D-8B06-CBC752079FC1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{424D1D54-EFCC-478D-8B06-CBC752079FC1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{424D1D54-EFCC-478D-8B06-CBC752079FC1}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

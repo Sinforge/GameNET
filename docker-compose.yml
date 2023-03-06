@@ -1,0 +1,8 @@
+version: '3.4'
+
+services:
+  gamehub:
+    image: ${DOCKER_REGISTRY-}gamehub
+    build:
+      context: .
+      dockerfile: GameHub/Dockerfile
