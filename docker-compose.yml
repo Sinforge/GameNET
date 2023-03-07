@@ -1,8 +1,14 @@
 version: '3.4'
 
 services:
+  accountservice:
+    image: ${DOCKER_REGISTRY-}accountservice
+    build:
+      context: .
+      dockerfile: AccountService/Dockerfile
   articleservice:
     image: ${DOCKER_REGISTRY-}articleservice
     build:
       context: .
       dockerfile: ArticleService/Dockerfile
+

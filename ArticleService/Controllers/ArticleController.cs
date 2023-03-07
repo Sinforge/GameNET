@@ -26,29 +26,6 @@ namespace GameHub.Controllers
 
 
 
-        [HttpGet("/registration")]
-        public ActionResult CreateUser(ArticleCreateDto articleCreateDto)
-        {
-
-
-            User? user = db.Users.FirstOrDefault(u => u.UserId == userId || u.Email == email);
-            if (user != null)
-            {
-                _logger.LogInformation("User with such Id or Email exist");
-            }
-
-            db.Add(new User
-            {
-                UserId = userId,
-                Name = userName,
-                Password = password,
-                Email = email,
-                Role = Role.DefaultUser
-            });
-
-            await db.SaveChangesAsync();
-        }
-
 
         [HttpPost("/article")]
         public ActionResult CreateArticle(ArticleCreateDto articleCreateDto)
@@ -62,3 +39,4 @@ namespace GameHub.Controllers
         }
 
     }
+}

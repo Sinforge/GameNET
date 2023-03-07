@@ -12,6 +12,6 @@ namespace GameHub.Models
         [Required]
         public string Text { get; set; } = null!;
         [Required]
-        public User? Owner { get; set; } = null!;
+        public string OwnerId { get; set; } = null!;
     }
 }

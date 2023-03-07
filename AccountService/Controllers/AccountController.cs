@@ -15,6 +15,7 @@ public class AccountController : ControllerBase
     private readonly UserRepo _userRepo;
     private readonly ILogger<AccountController> _logger;
     private readonly IMapper _mapper;
+
     public AccountController(UserRepo userRepo, ILogger<AccountController> logger, IMapper mapper)
     {
         _userRepo = userRepo;
@@ -33,6 +34,7 @@ public class AccountController : ControllerBase
             _logger.LogInformation("User with such Id or Email exist");
             return BadRequest("User with such id exist");
         }
+
         user = _mapper.Map<User>(userCreateDto);
         _userRepo.CreateUser(user);
         _userRepo.SaveChanges();
@@ -56,3 +58,4 @@ public class AccountController : ControllerBase
         return Ok();
 
     }
+}
