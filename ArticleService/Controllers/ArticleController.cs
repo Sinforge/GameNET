@@ -1,14 +1,15 @@
 ﻿using System.Security.Claims;
+using ArticleService.Data;
+using ArticleService.DTOs;
+using ArticleService.Models;
 using AutoMapper;
-using GameHub.Data;
-using GameHub.DTOs;
-using GameHub.Models;
+
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
-namespace GameHub.Controllers
+namespace ArticleService.Controllers
 {
     [ApiController]
     public class ArticleController : ControllerBase
@@ -26,15 +27,21 @@ namespace GameHub.Controllers
 
 
 
-
-        [HttpPost("/article")]
+        [HttpGet]
+        [Route("/hello")]
+        public ActionResult HelloWorld()
+        {
+            return Content("Hello world");
+        }
+        [HttpPost]
+        [Route("/article")]
         public ActionResult CreateArticle(ArticleCreateDto articleCreateDto)
         {
             var article = _mapper.Map<Article>(articleCreateDto);
             _articleRepo.CreateArticle(article);
             _articleRepo.SaveChanges();
             _logger.LogInformation("Created new article");
-            return Ok();
+            return Ok("Data saved");
 
         }
 

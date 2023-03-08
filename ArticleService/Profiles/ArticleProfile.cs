@@ -1,8 +1,8 @@
 ﻿using AutoMapper;
-using GameHub.DTOs;
-using GameHub.Models;
+using ArticleService.DTOs;
+using ArticleService.Models;
 
-namespace GameHub.Profiles
+namespace ArticleService.Profiles
 {
     public class ArticleProfile: Profile
     {

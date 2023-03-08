@@ -9,18 +9,24 @@ using Microsoft.AspNetCore.Mvc;
 namespace AccountService.Controllers;
 
 [ApiController]
-[Route("[controller]")]
-public class AccountController : ControllerBase
+public class AccountController : Controller
 {
-    private readonly UserRepo _userRepo;
+    private readonly IUserRepo _userRepo;
     private readonly ILogger<AccountController> _logger;
     private readonly IMapper _mapper;
 
-    public AccountController(UserRepo userRepo, ILogger<AccountController> logger, IMapper mapper)
+    public AccountController(IUserRepo userRepo, ILogger<AccountController> logger, IMapper mapper)
     {
         _userRepo = userRepo;
         _logger = logger;
         _mapper = mapper;
+    }
+
+    [HttpGet]
+    [Route("/helloworld")]
+    public ActionResult HelloWorld()
+    {
+        return Content("HEllo world");
     }
 
     [HttpPost("/registration")]
@@ -36,6 +42,7 @@ public class AccountController : ControllerBase
         }
 
         user = _mapper.Map<User>(userCreateDto);
+        user.Role = Role.DefaultUser;
         _userRepo.CreateUser(user);
         _userRepo.SaveChanges();
         _logger.LogInformation("User successful registered");

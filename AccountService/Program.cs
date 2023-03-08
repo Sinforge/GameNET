@@ -11,8 +11,6 @@ builder.Services.AddDbContext<ApplicationContext>(
 builder.Services.AddScoped<IUserRepo, UserRepo>();
 builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 builder.Services.AddControllers();
-builder.Services.AddEndpointsApiExplorer();
-
 var app = builder.Build();
 
 
@@ -20,7 +18,9 @@ app.UseHttpsRedirection();
 
 app.UseAuthorization();
 
-app.MapControllers();
+app.MapControllerRoute(
+    name: "default",
+    pattern: "api/{controller=Account}/{action=HelloWorld}");
 
 app.Run();
 

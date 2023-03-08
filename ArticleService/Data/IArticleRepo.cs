@@ -1,6 +1,6 @@
-﻿using GameHub.Models;
+﻿using ArticleService.Models;
 
-namespace GameHub.Data
+namespace ArticleService.Data
 {
     public interface IArticleRepo
     {

@@ -1,7 +1,7 @@
-﻿using GameHub.Models;
+﻿using ArticleService.Models;
 using Microsoft.EntityFrameworkCore;
 
-namespace GameHub.Data
+namespace ArticleService.Data
 {
     public class ApplicationContext : DbContext
     {

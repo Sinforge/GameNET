@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace GameHub.Models
+namespace ArticleService.Models
 {
     public class Article
     {
@@ -12,6 +12,6 @@ namespace GameHub.Models
         [Required]
         public string Text { get; set; } = null!;
         [Required]
-        public string OwnerId { get; set; } = null!;
+        public string Owner { get; set; } = null!;
     }
 }

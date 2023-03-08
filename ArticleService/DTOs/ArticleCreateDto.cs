@@ -1,4 +1,4 @@
-﻿namespace GameHub.DTOs
+﻿namespace ArticleService.DTOs
 {
     public class ArticleCreateDto
     {
