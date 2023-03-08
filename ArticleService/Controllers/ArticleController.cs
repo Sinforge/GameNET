@@ -34,7 +34,7 @@ namespace ArticleService.Controllers
             return Content("Hello world");
         }
         [HttpPost]
-        [Route("/article")]
+        [Route("/CreateArticle")]
         public ActionResult CreateArticle(ArticleCreateDto articleCreateDto)
         {
             var article = _mapper.Map<Article>(articleCreateDto);

@@ -12,3 +12,13 @@ services:
       context: .
       dockerfile: ArticleService/Dockerfile
 
+  postgres_img_account:
+    image: postgres:lates
+    ports: 
+      - "5432"
+    restart: always
+    environment:
+      "POSTGRES_USER": "vlad1234"
+      "POSTGRES_PASSWORD": "vlad1234"
+      "POSTGRES_DB": "accountdb"
+

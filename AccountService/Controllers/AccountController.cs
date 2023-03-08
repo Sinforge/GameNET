@@ -29,7 +29,7 @@ public class AccountController : Controller
         return Content("HEllo world");
     }
 
-    [HttpPost("/registration")]
+    [HttpPost("/Registration")]
     public ActionResult CreateUser(UserCreateDto userCreateDto)
     {
 
