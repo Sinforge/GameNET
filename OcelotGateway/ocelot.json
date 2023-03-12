@@ -13,17 +13,35 @@
       "UpstreamHttpMethod": [ "POST" ]
     },
     {
+      "DownstreamPathTemplate": "/login",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 5117
+        }
+      ],
+      "UpstreamPathTemplate": "/login",
+      "UpstreamHttpMethod": [ "GET" ],
+      
+    },
+    {
       "DownstreamPathTemplate": "/CreateArticle",
       "DownstreamScheme": "http",
       "DownstreamHostAndPorts": [
         {
           "Host": "localhost",
-          "Port": 7020
+          "Port": 5020
         }
       ],
-      "UpstreamPathTemplate": "/Article",
-      "UpstreamHttpMethod": [ "POST" ]
+      "UpstreamPathTemplate": "/CreateArticle",
+      "UpstreamHttpMethod": [ "POST" ],
+      "AuthenticationOptions": {
+        "AuthenticationProviderKey": "Bearer",
+        "AllowedScopes": []
+      }
     }
+
 
   ]
 
