@@ -1,11 +1,13 @@
 using AccountService.Data;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.IdentityModel.Tokens;
+using System.Text;
 
 var builder = WebApplication.CreateBuilder(args);
 
-builder.Services.AddAuthentication("Cookies")
-    .AddCookie();
-builder.Services.AddAuthorization();
+builder.Services.Configure<AccountService.Controllers.Audience>(builder.Configuration.GetSection("Audience"));
+
 builder.Services.AddDbContext<ApplicationContext>(
     options => options.UseNpgsql(builder.Configuration.GetConnectionString(name: "DefaultConnection")));
 builder.Services.AddScoped<IUserRepo, UserRepo>();
@@ -23,4 +25,6 @@ app.MapControllerRoute(
     pattern: "api/{controller=Account}/{action=HelloWorld}");
 
 app.Run();
+
+
 
