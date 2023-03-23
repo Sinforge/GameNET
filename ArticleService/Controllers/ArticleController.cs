@@ -11,6 +11,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace ArticleService.Controllers
 {
+
     [ApiController]
     public class ArticleController : ControllerBase
     {
@@ -25,17 +26,31 @@ namespace ArticleService.Controllers
             _articleRepo = articleRepo;
         }
 
-
-
+        /// <summary>
+        /// Return Hello World message.
+        /// </summary>
         [HttpGet]
         [Route("/hello")]
         public ActionResult HelloWorld()
         {
             return Content("Hello world");
         }
+
+        /// <summary>
+        /// Create a article
+        /// </summary>
+        /// <remark>
+        /// Sample of request:
+        /// {
+        ///     "Title": "Aboba",
+        ///     "Text": "AVFAfa",
+        ///     "Owner": "me"
+        /// }
+        /// </remark>
+        /// <returns>Ok</returns>
         [HttpPost]
         [Route("/CreateArticle")]
-        public ActionResult CreateArticle(ArticleCreateDto articleCreateDto)
+        public IActionResult CreateArticle(ArticleCreateDto articleCreateDto)
         {
             var article = _mapper.Map<Article>(articleCreateDto);
             _articleRepo.CreateArticle(article);
@@ -43,6 +58,38 @@ namespace ArticleService.Controllers
             _logger.LogInformation("Created new article");
             return Ok("Data saved");
 
+        }
+
+
+        /// <summary>
+        /// Get all articles
+        /// </summary>
+        /// <returns>List of articles</returns>
+        [HttpGet]
+        [Route("/GetAllArticles")]
+        public IActionResult GetAllArticles()
+        {
+            
+            return Ok(_articleRepo.GetAllArticles());
+        }
+
+
+
+        /// <summary>
+        /// Get article with id
+        /// </summary>
+        /// <param name="id">Id of article</param>
+        /// <returns>Ok 200 and article, or 404 with error message</returns>
+        [HttpGet]
+        [Route("/GetArticle/{id}")]
+        public IActionResult GetArticle(int id)
+        {
+            Article? article = _articleRepo.GetArticleById(id);
+            if (article == null)
+            {
+                return NotFound("object with such id not found");
+            }
+            return Ok(article);
         }
 
     }

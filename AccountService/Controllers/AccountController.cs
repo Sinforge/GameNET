@@ -58,6 +58,23 @@ public class AccountController : Controller
     }
 
 
+    /// <summary>
+    /// Get Jwt Token
+    /// </summary>
+    /// <remark>
+    /// Sample of request:
+    /// {
+    ///     "passowrd": "string"
+    ///     "userId": "string"
+    /// }
+    /// </remark>
+    /// <returns>
+    /// {
+    ///     "access_token" : "YOUR JWT token"
+    ///     "expires_in": "Time of expire"
+    /// }
+    /// </returns>
+
     [HttpGet("/login")]
     public async Task<ActionResult> Login(string password, string userId)
     {

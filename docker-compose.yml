@@ -1,6 +1,15 @@
 version: '3.4'
 
 services:
+  postgres_img_account:
+      image: postgres
+      restart: always
+      environment:
+        "POSTGRES_USER": "vlad1234"
+        "POSTGRES_PASSWORD": "vlad1234"
+        "POSTGRES_DB": "accountdb"
+      volumes:
+        - postgres-data:/var/lib/postgresql/data
   accountservice:
     image: ${DOCKER_REGISTRY-}accountservice
     build:
@@ -11,14 +20,11 @@ services:
     build:
       context: .
       dockerfile: ArticleService/Dockerfile
+    depends_on:
+     - postgres_img_account
 
-  postgres_img_account:
-    image: postgres:lates
-    ports: 
-      - "5432"
-    restart: always
-    environment:
-      "POSTGRES_USER": "vlad1234"
-      "POSTGRES_PASSWORD": "vlad1234"
-      "POSTGRES_DB": "accountdb"
+  
+  
+volumes:
+  postgres-data:
 

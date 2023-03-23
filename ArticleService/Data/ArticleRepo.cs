@@ -21,6 +21,11 @@ namespace ArticleService.Data
             return _context.Articles.ToList();
         }
 
+        public Article? GetArticleById(int id)
+        {
+            return _context.Articles.FirstOrDefault(a => a.Id == id);
+        }
+
         public bool SaveChanges()
         {
             return _context.SaveChanges() >= 0;
