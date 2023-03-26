@@ -1,4 +1,4 @@
-# GameHub
+# GameNET
 ## Goals
 1) Create a list of games with their description
 2) The ability for users to create articles about games 
