@@ -11,6 +11,7 @@ namespace AccountService.Data
 
         IEnumerable<User> GetAllUsers();
 
+        Task<User?> GetUserDataById(string id);
         bool SaveChanges();
 
     }

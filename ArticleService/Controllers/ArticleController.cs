@@ -92,5 +92,18 @@ namespace ArticleService.Controllers
             return Ok(article);
         }
 
+
+        /// <summary>
+        /// Get articles by user
+        /// </summary>
+        /// <param name="userId">Id of user</param>
+        /// <returns>Ok 200 and list of article, or 404 with error message</returns>
+        [HttpGet]
+        [Route("/GetAllArticles/{userId}")]
+        public IActionResult GetArticlesByUser(string userId)
+        {
+            return Ok(_articleRepo.GetArticlesByUser(userId));
+        }
+
     }
 }

@@ -9,6 +9,9 @@ namespace ArticleService.Data
         IEnumerable<Article> GetAllArticles();
 
         Article? GetArticleById(int id);
+
+        
+        IEnumerable<Article> GetArticlesByUser(string userId);
         bool SaveChanges();
     }
 }

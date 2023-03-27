@@ -1,23 +1,88 @@
 version: '3.4'
 
+
 services:
-  accountservice:
-    environment:
-      - ASPNETCORE_ENVIRONMENT=Development
-      - ASPNETCORE_URLS=https://+:443;http://+:80
-    ports:
-      - "80"
-      - "443"
-    volumes:
-      - ${APPDATA}/Microsoft/UserSecrets:/root/.microsoft/usersecrets:ro
-      - ${APPDATA}/ASP.NET/Https:/root/.aspnet/https:ro
-  articleservice:
-    environment:
-      - ASPNETCORE_ENVIRONMENT=Development
-      - ASPNETCORE_URLS=https://+:443;http://+:80
-    ports:
-      - "80"
-      - "443"
-    volumes:
-      - ${APPDATA}/Microsoft/UserSecrets:/root/.microsoft/usersecrets:ro
-      - ${APPDATA}/ASP.NET/Https:/root/.aspnet/https:ro
+
+
+    chatservice:
+        ports:
+            - "8090:80"
+
+        environment:
+            - ASPNETCORE_URLS=http://+:80 
+
+
+
+
+    ocelotgateway:
+   
+        ports:
+            - "8091:80"
+
+        depends_on:
+            - articleservice
+            - accountservice
+            - chatservice
+
+        environment:
+            - ASPNETCORE_URLS=http://+:80 
+            - ASPNETCORE_ENVIRONMENT=Development
+
+
+
+    articleservice:
+     
+        depends_on:
+         - article_db
+        ports:
+            - "8088:80"
+        environment:
+            - ConnectionStrings__DefaultConnection=Server=article_db;Port=5432;Database=articledb;User Id=postgres;Password=postgres;
+            - ASPNETCORE_URLS=http://+:80 
+        networks:
+            - article   
+
+
+
+    accountservice:
+        depends_on:
+            - account_db
+        ports:
+            - "8809:80"
+ 
+        environment:
+            - ConnectionStrings__DefaultConnection=Server=article_db;Port=5432;Database=accountdb;User Id=postgres;Password=postgres;
+            - ASPNETCORE_URLS=http://+:80 
+        networks:
+            - account
+
+
+    account_db:
+    
+        container_name: account_db
+        environment: 
+            - POSTGRES_USER=postgres
+            - POSTGRES_PASSWORD=postgres
+            - POSTGRES_DB=accountdb
+        ports:
+            - "5322:5323"
+        volumes:
+            - account_data:/var/lib/postgresql/data
+        networks:
+            - account
+
+
+
+    article_db:
+        container_name: article_db
+        environment: 
+            - POSTGRES_USER=postgres
+            - POSTGRES_PASSWORD=postgres
+            - POSTGRES_DB=articledb
+        ports:
+            - "5433:5432"
+        volumes:
+            - article_data:/var/lib/postgresql/data
+        networks:
+            - article
+    

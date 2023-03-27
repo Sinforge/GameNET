@@ -26,6 +26,11 @@ namespace ArticleService.Data
             return _context.Articles.FirstOrDefault(a => a.Id == id);
         }
 
+        public IEnumerable<Article> GetArticlesByUser(string userId)
+        {
+            return from article in _context.Articles where article.Owner == userId select article;
+        }
+
         public bool SaveChanges()
         {
             return _context.SaveChanges() >= 0;

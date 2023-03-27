@@ -9,6 +9,7 @@ using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Mvc;
 using System.Text;
 using Microsoft.IdentityModel.Tokens;
+using Microsoft.AspNetCore.Authorization;
 
 namespace AccountService.Controllers;
 
@@ -38,7 +39,7 @@ public class AccountController : Controller
 
 
     [HttpPost("/Registration")]
-    public ActionResult CreateUser(UserCreateDto userCreateDto)
+    public ActionResult CreateUser(UserCreateDto userCreateDto, bool isAdmin=false)
     {
 
 
@@ -50,7 +51,7 @@ public class AccountController : Controller
         }
 
         user = _mapper.Map<User>(userCreateDto);
-        user.Role = Role.DefaultUser;
+        user.Role = isAdmin ? Role.Admin : Role.DefaultUser;
         _userRepo.CreateUser(user);
         _userRepo.SaveChanges();
         _logger.LogInformation("User successful registered");
@@ -126,6 +127,14 @@ public class AccountController : Controller
             return BadRequest();
         }
 
+    }
+
+    [HttpGet]
+    [Authorize(Roles= "admin")]
+    [Route("/user")]
+    public IActionResult GetUserDataById(string userId)
+    {
+        return Ok(_userRepo.GetUserDataById(userId));
     }
 }
 public class Audience

@@ -5,8 +5,8 @@
       "DownstreamScheme": "http",
       "DownstreamHostAndPorts": [
         {
-          "Host": "localhost",
-          "Port": 5117
+          "Host": "accountservice",
+          "Port": "80"
         }
       ],
       "UpstreamPathTemplate": "/{everything}",
@@ -18,8 +18,8 @@
       "DownstreamScheme": "http",
       "DownstreamHostAndPorts": [
         {
-          "Host": "localhost",
-          "Port": 5020
+          "Host": "articleservice",
+          "Port": "80"
         }
       ],
       "UpstreamPathTemplate": "/{everything}",
@@ -34,8 +34,8 @@
       "DownstreamScheme": "http",
       "DownstreamHostAndPorts": [
         {
-          "Host": "localhost",
-          "Port": 5173
+          "Host": "chatservice",
+          "Port": "80"
         }
       ],
       "UpstreamPathTemplate": "/{everything}",

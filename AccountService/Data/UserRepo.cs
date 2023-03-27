@@ -1,4 +1,5 @@
 ﻿using AccountService.Models;
+using Microsoft.EntityFrameworkCore;
 
 namespace AccountService.Data
 {
@@ -31,9 +32,15 @@ namespace AccountService.Data
             return _context.Users.ToList();
         }
 
+        public async Task<User?> GetUserDataById(string id)
+        {
+            return await _context.Users.FirstOrDefaultAsync(u => u.UserId == id);
+        }
+
         public bool SaveChanges()
         {
             return _context.SaveChanges() >= 0;
         }
+
     }
 }
