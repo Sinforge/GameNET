@@ -5,16 +5,16 @@ services:
 
 
     chatservice:
+        container_name: chatservice
         ports:
             - "8090:80"
 
-        environment:
-            - ASPNETCORE_URLS=http://+:80 
 
 
 
 
     ocelotgateway:
+        container_name: ocelot_gateway
    
         ports:
             - "8091:80"
@@ -26,35 +26,29 @@ services:
 
         environment:
             - ASPNETCORE_URLS=http://+:80 
-            - ASPNETCORE_ENVIRONMENT=Development
 
 
 
     articleservice:
-     
+        container_name: articleservice
         depends_on:
          - article_db
         ports:
             - "8088:80"
         environment:
             - ConnectionStrings__DefaultConnection=Server=article_db;Port=5432;Database=articledb;User Id=postgres;Password=postgres;
-            - ASPNETCORE_URLS=http://+:80 
-        networks:
-            - article   
 
 
 
     accountservice:
+        container_name:  accountservice
         depends_on:
             - account_db
         ports:
             - "8809:80"
  
         environment:
-            - ConnectionStrings__DefaultConnection=Server=article_db;Port=5432;Database=accountdb;User Id=postgres;Password=postgres;
-            - ASPNETCORE_URLS=http://+:80 
-        networks:
-            - account
+            - ConnectionStrings__DefaultConnection=Server=account_db;Port=5432;Database=accountdb;User Id=postgres;Password=postgres;
 
 
     account_db:
@@ -64,13 +58,13 @@ services:
             - POSTGRES_USER=postgres
             - POSTGRES_PASSWORD=postgres
             - POSTGRES_DB=accountdb
+    
         ports:
-            - "5322:5323"
+            - "5433:5432"
+        expose:
+            - "5433"
         volumes:
             - account_data:/var/lib/postgresql/data
-        networks:
-            - account
-
 
 
     article_db:
@@ -80,9 +74,7 @@ services:
             - POSTGRES_PASSWORD=postgres
             - POSTGRES_DB=articledb
         ports:
-            - "5433:5432"
+            - "5432:5432"
         volumes:
             - article_data:/var/lib/postgresql/data
-        networks:
-            - article
     
