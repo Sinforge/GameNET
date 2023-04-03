@@ -3,8 +3,8 @@
     {
       "DownstreamHostAndPorts": [
         {
-          "Host": "localhost",
-          "Port": 8809
+          "Host": "accountservice",
+          "Port": 80
         }
       ],
       // Account service
@@ -23,16 +23,13 @@
       "DownstreamHostAndPorts": [
         {
           "Host": "articleservice",
-          "Port": 8088
+          "Port": 80
         }
       ],
       "UpstreamPathTemplate": "/api/article/{everything}",
       "UpstreamHttpMethod": [ "POST", "GET" ],
       
-      "AuthenticationOptions": {
-        "AuthenticationProviderKey": "Bearer",
-        "AllowedScopes": []
-      }
+
     },
 
 
@@ -43,15 +40,12 @@
       "DownstreamHostAndPorts": [
         {
           "Host": "chatservice",
-          "Port": 8090
+          "Port": 80
         }
       ],
       "UpstreamPathTemplate": "/api/chat/{everything}",
       "UpstreamHttpMethod": [ "POST", "GET" ],
-      "AuthenticationOptions": {
-        "AuthenticationProviderKey": "Bearer",
-        "AllowedScopes": []
-      }
+
     }
 
   ]

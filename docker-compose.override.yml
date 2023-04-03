@@ -61,8 +61,6 @@ services:
     
         ports:
             - "5433:5432"
-        expose:
-            - "5433"
         volumes:
             - account_data:/var/lib/postgresql/data
 
