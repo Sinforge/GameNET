@@ -13,6 +13,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OcelotGateway", "OcelotGate
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ChatService", "ChatService\ChatService.csproj", "{73A76801-B991-4F3B-AC41-3B39CED1D3B8}"
 EndProject
+Project("{54A90642-561A-4BB1-A94E-469ADEE60C69}") = "Client", "Client\Client.esproj", "{CF03E8C5-C9D6-4E38-98B2-94A6FFAE8F26}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -39,6 +41,12 @@ Global
 		{73A76801-B991-4F3B-AC41-3B39CED1D3B8}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{73A76801-B991-4F3B-AC41-3B39CED1D3B8}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{73A76801-B991-4F3B-AC41-3B39CED1D3B8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CF03E8C5-C9D6-4E38-98B2-94A6FFAE8F26}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CF03E8C5-C9D6-4E38-98B2-94A6FFAE8F26}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CF03E8C5-C9D6-4E38-98B2-94A6FFAE8F26}.Debug|Any CPU.Deploy.0 = Debug|Any CPU
+		{CF03E8C5-C9D6-4E38-98B2-94A6FFAE8F26}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CF03E8C5-C9D6-4E38-98B2-94A6FFAE8F26}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CF03E8C5-C9D6-4E38-98B2-94A6FFAE8F26}.Release|Any CPU.Deploy.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
