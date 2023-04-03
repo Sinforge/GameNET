@@ -5,6 +5,7 @@ using Ocelot.Middleware;
 using System.Text;
 
 var builder = WebApplication.CreateBuilder(args);
+builder.Services.AddCors();
 builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
     .AddJwtBearer(option =>
     {
@@ -27,7 +28,7 @@ builder.Services.AddAuthorization();
 builder.Configuration.AddJsonFile("ocelot.json", optional: false, reloadOnChange: true);
 builder.Services.AddOcelot(builder.Configuration);
 var app = builder.Build();
-
+app.UseCors(b => b.AllowAnyOrigin());
 app.MapGet("/", () => "Hello World!");
 app.MapControllers();
 app.UseOcelot();
