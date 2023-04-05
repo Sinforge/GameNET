@@ -10,7 +10,7 @@ namespace ArticleService.Profiles
         {
             // Source --> Target
             CreateMap<ArticleCreateDto, Article>();
-
+            CreateMap<CommentCreateDto, Comment>();
         }
     }
 }

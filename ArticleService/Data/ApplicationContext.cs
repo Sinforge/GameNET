@@ -6,6 +6,9 @@ namespace ArticleService.Data
     public class ApplicationContext : DbContext
     {
         public DbSet<Article> Articles { get; set; }
+
+        public DbSet<Comment> Comments { get; set; }
+
         public ApplicationContext(DbContextOptions<ApplicationContext> options)
             : base(options)
         {

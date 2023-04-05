@@ -13,5 +13,7 @@ namespace ArticleService.Models
         public string Text { get; set; } = null!;
         [Required]
         public string Owner { get; set; } = null!;
+
+        public virtual ICollection<Comment> Comments { get; set; } 
     }
 }

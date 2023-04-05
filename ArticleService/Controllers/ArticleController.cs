@@ -52,6 +52,7 @@ namespace ArticleService.Controllers
         [Route("/CreateArticle")]
         public IActionResult CreateArticle(ArticleCreateDto articleCreateDto)
         {
+            _logger.LogInformation($"Request for creating new article");
             var article = _mapper.Map<Article>(articleCreateDto);
             _articleRepo.CreateArticle(article);
             _articleRepo.SaveChanges();
@@ -69,7 +70,7 @@ namespace ArticleService.Controllers
         [Route("/GetAllArticles")]
         public IActionResult GetAllArticles()
         {
-            
+            _logger.LogInformation($"Request for getting all articles");
             return Ok(_articleRepo.GetAllArticles());
         }
 
@@ -84,6 +85,8 @@ namespace ArticleService.Controllers
         [Route("/GetArticle/{id}")]
         public IActionResult GetArticle(int id)
         {
+            _logger.LogInformation($"Request for getting article by id-number : {id}");
+
             Article? article = _articleRepo.GetArticleById(id);
             if (article == null)
             {
@@ -102,7 +105,26 @@ namespace ArticleService.Controllers
         [Route("/GetAllArticles/{userId}")]
         public IActionResult GetArticlesByUser(string userId)
         {
+            _logger.LogInformation($"Request for getting articles by user : {userId}");
             return Ok(_articleRepo.GetArticlesByUser(userId));
+        }
+
+
+        [HttpPost]
+        [Route("/PostComment")]
+        public IActionResult PostComment(CommentCreateDto commentCreateDto)
+        {
+            _logger.LogInformation($"Post comment");
+            _articleRepo.CreateComment(commentCreateDto);
+            _articleRepo.SaveChanges();
+            return Ok();
+        }
+
+        [HttpGet]
+        [Route("/GetComments/{articleId}")]
+        public IActionResult GetComments(int articleId) {
+            _logger.LogInformation($"Request for all comments for article with id : {articleId}");
+            return Ok(_articleRepo.GetCommentsByArticle(articleId));
         }
 
     }

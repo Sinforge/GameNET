@@ -1,4 +1,5 @@
-﻿using ArticleService.Models;
+﻿using ArticleService.DTOs;
+using ArticleService.Models;
 
 namespace ArticleService.Data
 {
@@ -13,5 +14,12 @@ namespace ArticleService.Data
         
         IEnumerable<Article> GetArticlesByUser(string userId);
         bool SaveChanges();
+
+
+        IEnumerable<Comment> GetCommentsByArticle(int id);
+
+ 
+
+        Task CreateComment(CommentCreateDto comment);
     }
 }
