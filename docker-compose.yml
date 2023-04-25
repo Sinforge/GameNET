@@ -7,7 +7,10 @@ networks:
 
 services:
 
-
+    rabbitmq:
+        image: rabbitmq
+        ports:
+          - 15672:15672
     chatservice:
         image: ${DOCKER_REGISTRY-}chatservice
         build:

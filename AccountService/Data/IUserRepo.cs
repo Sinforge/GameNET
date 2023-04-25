@@ -1,4 +1,6 @@
 ﻿using AccountService.Models;
+using ArticleService.IntegrationEvents;
+using Newtonsoft.Json.Bson;
 
 namespace AccountService.Data
 {
@@ -13,6 +15,10 @@ namespace AccountService.Data
 
         Task<User?> GetUserDataById(string id);
         bool SaveChanges();
+
+        void CreateNotifications(UserCreateArticleIntegrationEvent createArticleEvent);
+
+        void SubsribeToUser(string userId1, string userId2);
 
     }
 }

@@ -75,6 +75,8 @@ public class AccountController : Controller
     ///     "expires_in": "Time of expire"
     /// }
     /// </returns>
+    /// 
+
 
     [HttpGet("/login")]
     public async Task<ActionResult> Login(string password, string userId)
@@ -135,6 +137,16 @@ public class AccountController : Controller
     public IActionResult GetUserDataById(string userId)
     {
         return Ok(_userRepo.GetUserDataById(userId));
+    }
+
+
+    [HttpPost]
+    [Route("/subscribe")]
+    public IActionResult SubscribeToUser(string userId1, string userId2)
+    {
+        _logger.LogInformation("subsribing to user");
+        _userRepo.SubsribeToUser(userId1, userId2);
+        return Ok();
     }
 }
 public class Audience

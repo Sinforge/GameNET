@@ -27,7 +27,7 @@
         }
       ],
       "UpstreamPathTemplate": "/api/article/{everything}",
-      "UpstreamHttpMethod": [ "POST", "GET" ],
+      "UpstreamHttpMethod": [ "POST", "GET" ]
       
 
     },
@@ -44,7 +44,7 @@
         }
       ],
       "UpstreamPathTemplate": "/api/chat/{everything}",
-      "UpstreamHttpMethod": [ "POST", "GET" ],
+      "UpstreamHttpMethod": [ "POST", "GET" ]
 
     }
 

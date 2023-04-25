@@ -1,6 +1,7 @@
 using System.Reflection;
 using System.Text;
 using ArticleService.Data;
+using ArticleService.Services;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
@@ -33,6 +34,7 @@ builder.Services.AddAuthorization();
 builder.Services.AddDbContext<ApplicationContext>(
     options => options.UseNpgsql(builder.Configuration.GetConnectionString(name: "DefaultConnection")));
 builder.Services.AddScoped<IArticleRepo, ArticleRepo>();
+builder.Services.AddSingleton<IArticleService, ArticleService.Services.ArticleService>();
 builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 builder.Services.AddControllers();
 var app = builder.Build();

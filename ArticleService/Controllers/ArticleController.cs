@@ -2,6 +2,7 @@
 using ArticleService.Data;
 using ArticleService.DTOs;
 using ArticleService.Models;
+using ArticleService.Services;
 using AutoMapper;
 
 using Microsoft.AspNetCore.Authentication;
@@ -17,10 +18,12 @@ namespace ArticleService.Controllers
     {
         private readonly ILogger<ArticleController> _logger;
         private readonly IArticleRepo _articleRepo;
+        private readonly IArticleService _articleService;
         private readonly IMapper _mapper;
 
-        public ArticleController(ILogger<ArticleController> logger, IArticleRepo articleRepo, IMapper mapper)
+        public ArticleController(ILogger<ArticleController> logger, IArticleRepo articleRepo, IMapper mapper, IArticleService articleService)
         {
+            _articleService = articleService;
             _mapper = mapper;
             _logger = logger;
             _articleRepo = articleRepo;
@@ -53,9 +56,8 @@ namespace ArticleService.Controllers
         public IActionResult CreateArticle(ArticleCreateDto articleCreateDto)
         {
             _logger.LogInformation($"Request for creating new article");
-            var article = _mapper.Map<Article>(articleCreateDto);
-            _articleRepo.CreateArticle(article);
-            _articleRepo.SaveChanges();
+            _articleService.CreateArticle(articleCreateDto);
+
             _logger.LogInformation("Created new article");
             return Ok("Data saved");
 
