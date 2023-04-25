@@ -32,6 +32,7 @@ services:
     articleservice:
         container_name: articleservice
         depends_on:
+         - rabbitmq
          - article_db
         ports:
             - "8088:80"
@@ -43,6 +44,7 @@ services:
     accountservice:
         container_name:  accountservice
         depends_on:
+            - rabbitmq
             - account_db
         ports:
             - "8809:80"

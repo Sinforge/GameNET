@@ -16,7 +16,7 @@ namespace AccountService.Data
         Task<User?> GetUserDataById(string id);
         bool SaveChanges();
 
-        void CreateNotifications(UserCreateArticleIntegrationEvent createArticleEvent);
+        void CreateNotifications(UserCreateArticleEvent createArticleEvent);
 
         void SubsribeToUser(string userId1, string userId2);
 

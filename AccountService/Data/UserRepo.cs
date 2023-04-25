@@ -15,7 +15,7 @@ namespace AccountService.Data
             _context = context;
         }
 
-        public void CreateNotifications(UserCreateArticleIntegrationEvent createArticleEvent)
+        public void CreateNotifications(UserCreateArticleEvent createArticleEvent)
         {
             var userSubsribers  = _context.Users.Include(u => u.Subscribers).FirstOrDefault(u => u.UserId == createArticleEvent.UserId)?.Subscribers;
             if (userSubsribers != null)
@@ -26,7 +26,7 @@ namespace AccountService.Data
                     notification.Text = createArticleEvent.ArticleTitle;
                     notification.User = user;
                     notification.isChecked = false;
-
+                    notification.Url = "pass";
                     _context.Notifications.Add(notification);
                     user.Notifications.Add(notification);
 

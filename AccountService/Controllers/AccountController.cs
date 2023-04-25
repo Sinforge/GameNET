@@ -10,6 +10,7 @@ using Microsoft.AspNetCore.Mvc;
 using System.Text;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.AspNetCore.Authorization;
+using AccountService.Services;
 
 namespace AccountService.Controllers;
 
@@ -20,8 +21,10 @@ public class AccountController : Controller
     private readonly ILogger<AccountController> _logger;
     private readonly IMapper _mapper;
     private readonly IOptions<Audience> _settings;
-    public AccountController(IUserRepo userRepo, ILogger<AccountController> logger, IMapper mapper, IOptions<Audience> settings)
+    private readonly IMessageReceiver _messageReceiver;
+    public AccountController(IUserRepo userRepo, ILogger<AccountController> logger, IMapper mapper, IOptions<Audience> settings, IMessageReceiver messageReceiver)
     {
+        _messageReceiver = messageReceiver;
         _settings = settings;
         _userRepo = userRepo;
         _logger = logger;

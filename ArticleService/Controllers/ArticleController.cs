@@ -1,6 +1,7 @@
 ﻿using System.Security.Claims;
 using ArticleService.Data;
 using ArticleService.DTOs;
+using ArticleService.IntegrationEvents;
 using ArticleService.Models;
 using ArticleService.Services;
 using AutoMapper;
@@ -18,12 +19,12 @@ namespace ArticleService.Controllers
     {
         private readonly ILogger<ArticleController> _logger;
         private readonly IArticleRepo _articleRepo;
-        private readonly IArticleService _articleService;
+        private readonly IMessageProducer _messageProducer;
         private readonly IMapper _mapper;
 
-        public ArticleController(ILogger<ArticleController> logger, IArticleRepo articleRepo, IMapper mapper, IArticleService articleService)
+        public ArticleController(ILogger<ArticleController> logger, IArticleRepo articleRepo, IMapper mapper, IMessageProducer messageProducer)
         {
-            _articleService = articleService;
+            _messageProducer = messageProducer;
             _mapper = mapper;
             _logger = logger;
             _articleRepo = articleRepo;
@@ -56,9 +57,18 @@ namespace ArticleService.Controllers
         public IActionResult CreateArticle(ArticleCreateDto articleCreateDto)
         {
             _logger.LogInformation($"Request for creating new article");
-            _articleService.CreateArticle(articleCreateDto);
-
+            var article = _mapper.Map<Article>(articleCreateDto);
+            _articleRepo.CreateArticle(article);
+            _articleRepo.SaveChanges();
             _logger.LogInformation("Created new article");
+            _messageProducer.SendMessage<UserCreateArticleEvent>(
+                new UserCreateArticleEvent(
+                    article.Id,
+                    article.Title,
+                    article.Owner
+                    )
+             );
+
             return Ok("Data saved");
 
         }

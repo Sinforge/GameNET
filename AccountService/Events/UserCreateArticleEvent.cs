@@ -2,7 +2,7 @@
 
 namespace ArticleService.IntegrationEvents
 {
-    public class UserCreateArticleIntegrationEvent
+    public class UserCreateArticleEvent
     {
         public int ArticleId { get; set; }
         public string ArticleTitle { get; set; } = null!;

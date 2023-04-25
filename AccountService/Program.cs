@@ -1,4 +1,5 @@
 using AccountService.Data;
+using AccountService.Services;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
@@ -35,6 +36,7 @@ builder.Services.Configure<AccountService.Controllers.Audience>(builder.Configur
 builder.Services.AddDbContext<ApplicationContext>(
     options => options.UseNpgsql(builder.Configuration.GetConnectionString(name: "DefaultConnection")));
 builder.Services.AddScoped<IUserRepo, UserRepo>();
+builder.Services.AddHostedService<MessageReceiver>();
 builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 builder.Services.AddControllers();
 var app = builder.Build();
