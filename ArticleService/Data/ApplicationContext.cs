@@ -1,19 +1,21 @@
 ﻿using ArticleService.Models;
 using Microsoft.EntityFrameworkCore;
+using Npgsql;
+using System.Data;
 
 namespace ArticleService.Data
 {
-    public class ApplicationContext : DbContext
+    public class ApplicationContext
     {
-        public DbSet<Article> Articles { get; set; }
-
-        public DbSet<Comment> Comments { get; set; }
-
-        public ApplicationContext(DbContextOptions<ApplicationContext> options)
-            : base(options)
+        private readonly IConfiguration _configuration;
+        private readonly string _connectionString;
+        public ApplicationContext(IConfiguration configuration)
         {
-            Database.EnsureCreated();   // создаем базу данных при первом обращении
+            _configuration = configuration;
+            _connectionString = _configuration.GetConnectionString("DefaultConnection");
         }
+        public IDbConnection CreateConnection()
+            => new NpgsqlConnection(_connectionString);
 
 
     }

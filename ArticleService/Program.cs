@@ -3,7 +3,6 @@ using System.Text;
 using ArticleService.Data;
 using ArticleService.Services;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
-using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -35,7 +34,7 @@ builder.Services.AddAuthorization();
 
 builder.Services.AddSingleton<ApplicationContext>();
 builder.Services.AddScoped<IArticleRepo, ArticleRepo>();
-builder.Services.AddSingleton<IMessageProducer, MessageProducer>();
+//builder.Services.AddSingleton<IMessageProducer, MessageProducer>();
 builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 
 

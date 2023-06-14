@@ -13,7 +13,6 @@ namespace ArticleService.Data
 
         
         Task<IEnumerable<Article>> GetArticlesByUser(string userId);
-       Task<bool> SaveChanges();
 
 
         Task<IEnumerable<Comment>> GetCommentsByArticle(int id);

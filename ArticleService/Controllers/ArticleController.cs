@@ -19,12 +19,13 @@ namespace ArticleService.Controllers
     {
         private readonly ILogger<ArticleController> _logger;
         private readonly IArticleRepo _articleRepo;
-        private readonly IMessageProducer _messageProducer;
+        //private readonly IMessageProducer _messageProducer;
         private readonly IMapper _mapper;
 
-        public ArticleController(ILogger<ArticleController> logger, IArticleRepo articleRepo, IMapper mapper, IMessageProducer messageProducer)
+        public ArticleController(ILogger<ArticleController> logger, IArticleRepo articleRepo, IMapper mapper
+            )//IMessageProducer messageProducer)
         {
-            _messageProducer = messageProducer;
+            //_messageProducer = messageProducer;
             _mapper = mapper;
             _logger = logger;
             _articleRepo = articleRepo;
@@ -54,20 +55,19 @@ namespace ArticleService.Controllers
         /// <returns>Ok</returns>
         [HttpPost]
         [Route("/CreateArticle")]
-        public IActionResult CreateArticle(ArticleCreateDto articleCreateDto)
+        public async Task<IActionResult> CreateArticle(ArticleCreateDto articleCreateDto)
         {
             _logger.LogInformation($"Request for creating new article");
             var article = _mapper.Map<Article>(articleCreateDto);
-            _articleRepo.CreateArticle(article);
-            _articleRepo.SaveChanges();
+            await _articleRepo.CreateArticle(article);
             _logger.LogInformation("Created new article");
-            _messageProducer.SendMessage<UserCreateArticleEvent>(
-                new UserCreateArticleEvent(
-                    article.Id,
-                    article.Title,
-                    article.Owner
-                    )
-             );
+            //_messageProducer.SendMessage<UserCreateArticleEvent>(
+            //    new UserCreateArticleEvent(
+            //        article.Id,
+            //        article.Title,
+            //        article.Owner
+            //        )
+            // );
 
             return Ok("Data saved");
 
@@ -80,10 +80,10 @@ namespace ArticleService.Controllers
         /// <returns>List of articles</returns>
         [HttpGet]
         [Route("/GetAllArticles")]
-        public IActionResult GetAllArticles()
+        public async Task<IActionResult> GetAllArticles()
         {
             _logger.LogInformation($"Request for getting all articles");
-            return Ok(_articleRepo.GetAllArticles());
+            return Ok(await _articleRepo.GetAllArticles());
         }
 
 
@@ -95,11 +95,11 @@ namespace ArticleService.Controllers
         /// <returns>Ok 200 and article, or 404 with error message</returns>
         [HttpGet]
         [Route("/GetArticle/{id}")]
-        public IActionResult GetArticle(int id)
+        public async Task<IActionResult> GetArticle(int id)
         {
             _logger.LogInformation($"Request for getting article by id-number : {id}");
 
-            Article? article = _articleRepo.GetArticleById(id);
+            Article? article = await _articleRepo.GetArticleById(id);
             if (article == null)
             {
                 return NotFound("object with such id not found");
@@ -115,28 +115,27 @@ namespace ArticleService.Controllers
         /// <returns>Ok 200 and list of article, or 404 with error message</returns>
         [HttpGet]
         [Route("/GetAllArticles/{userId}")]
-        public IActionResult GetArticlesByUser(string userId)
+        public async Task<IActionResult> GetArticlesByUser(string userId)
         {
             _logger.LogInformation($"Request for getting articles by user : {userId}");
-            return Ok(_articleRepo.GetArticlesByUser(userId));
+            return Ok(await _articleRepo.GetArticlesByUser(userId));
         }
 
 
         [HttpPost]
         [Route("/PostComment")]
-        public IActionResult PostComment(CommentCreateDto commentCreateDto)
+        public async Task<IActionResult> PostComment(CommentCreateDto commentCreateDto)
         {
             _logger.LogInformation($"Post comment");
-            _articleRepo.CreateComment(commentCreateDto);
-            _articleRepo.SaveChanges();
+            await _articleRepo.CreateComment(commentCreateDto);
             return Ok();
         }
 
         [HttpGet]
         [Route("/GetComments/{articleId}")]
-        public IActionResult GetComments(int articleId) {
+        public async Task<IActionResult> GetComments(int articleId) {
             _logger.LogInformation($"Request for all comments for article with id : {articleId}");
-            return Ok(_articleRepo.GetCommentsByArticle(articleId));
+            return Ok(await _articleRepo.GetCommentsByArticle(articleId));
         }
 
     }

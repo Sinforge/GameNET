@@ -18,8 +18,8 @@ namespace AccountService.Data
 
         public async Task CreateNotifications(UserCreateArticleEvent createArticleEvent)
         {
-            var selectQuery = "SELECT subscriber_id FROM 'subscription where user_id = @publisher";
-            var insertQuery = "INSERT INTO notification (HtmlText, UserId) VALUES (@content, @receiver)";
+            var selectQuery = "SELECT subscriber_id FROM public.subscription where user_id = @publisher";
+            var insertQuery = "INSERT INTO public.notification (HtmlText, UserId) VALUES (@content, @receiver)";
             IEnumerable<int> subscribers;
 
             using (var connection = _context.CreateConnection())
@@ -27,13 +27,18 @@ namespace AccountService.Data
                 subscribers = await connection.QueryAsync<int>(selectQuery, createArticleEvent.UserId);
                 if (subscribers.Any())
                 {
+                    connection.Open();
                     string messageContent = $"User {createArticleEvent.UserId} create new article check this. Article id: {createArticleEvent.ArticleId}";
-                    foreach (var subscriber in subscribers)
+                    using (var transaction = connection.BeginTransaction())
                     {
-                        var @params = new DynamicParameters();
-                        @params.Add("content", messageContent);
-                        @params.Add("receiver", subscriber);
-                        await connection.ExecuteAsync(insertQuery, @params);
+                        foreach (var subscriber in subscribers)
+                        {
+                            var @params = new DynamicParameters();
+                            @params.Add("content", messageContent);
+                            @params.Add("receiver", subscriber);
+                            await connection.ExecuteAsync(insertQuery, @params);
+                        }
+                        transaction.Commit();
                     }
                 }
 
@@ -43,13 +48,13 @@ namespace AccountService.Data
 
         public async Task CreateUser(User user)
         {
-            var insertQuery = "INSERT INTO user (Id, Name, Password, Email, Role) VALUES (@Id, @Name, @Password, @Email, @Role)";
+            var insertQuery = "INSERT INTO public.user (id, name, password, email, role) VALUES (@id, @name, @password, @email, @role)";
             var @params = new DynamicParameters();
-            @params.Add("Id", user.UserId);
-            @params.Add("Name", user.Name);
-            @params.Add("Password", user.Password);
-            @params.Add("Email", user.Email);
-            @params.Add("UserId", Role.DefaultUser, System.Data.DbType.Int16);
+            @params.Add("id", user.UserId);
+            @params.Add("name", user.Name);
+            @params.Add("password", user.Password);
+            @params.Add("email", user.Email);
+            @params.Add("role", 1, System.Data.DbType.Int16);
             using(var connection = _context.CreateConnection())
             {
                 await connection.ExecuteAsync(insertQuery, @params);
@@ -58,10 +63,10 @@ namespace AccountService.Data
 
         public async Task<User> FindByEmailAndId(string email, string id)
         {
-            var selectQuery = "SELECT * FROM user WHERE \"Id\" = @Id OR \"Email\" = @Email";
+            var selectQuery = "SELECT * FROM public.user WHERE id = @id Or email = @email";
             var @params = new DynamicParameters();
-            @params.Add("Id", id);
-            @params.Add("Email", email);
+            @params.Add("id", id);
+            @params.Add("email", email);
             using(var connection = _context.CreateConnection())
             {
                 return await connection.QuerySingleOrDefaultAsync<User>(selectQuery, @params);
@@ -70,7 +75,7 @@ namespace AccountService.Data
 
         public async Task<User> FindById(string id)
         {
-            var selectQuery = "SELECT * FROM user WHERE Id = @Id";
+            var selectQuery = "SELECT * FROM public.user WHERE Id = @Id";
             using (var connection = _context.CreateConnection())
             {
                 return await connection.QuerySingleOrDefaultAsync<User>(selectQuery, new { id });
@@ -79,7 +84,7 @@ namespace AccountService.Data
 
         public async Task<IEnumerable<User>> GetAllUsers()
         {
-            var selectQuery = "SELECT * FROM user";
+            var selectQuery = "SELECT * FROM public.user";
             using (var connection = _context.CreateConnection())
             {
                 return await connection.QueryAsync<User>(selectQuery);
@@ -95,7 +100,7 @@ namespace AccountService.Data
 
         public async Task SubsribeToUser(string userId1, string userId2)
         {
-            var insertQuery = "INSERT INTO subscription (user_id, subscriber_id) values (@u1, @u2)";
+            var insertQuery = "INSERT INTO public.subscription (user_id, subscriber_id) values (@u1, @u2)";
             var @params = new DynamicParameters();
             @params.Add("u1", userId1);
             @params.Add("u2", userId2);

@@ -4,8 +4,8 @@ namespace ArticleService.DTOs
 {
     public class CommentCreateDto
     {
-        public int FatherCommentId { get; set; }
-        public string Date { get; set; } = null!;
+        public int? ParentId { get; set; } = null!;
+        public DateTime Date { get; set; }
 
         public string Content { get; set; } = null!;
 

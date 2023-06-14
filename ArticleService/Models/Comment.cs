@@ -7,17 +7,17 @@ namespace ArticleService.Models
         [Key]
         public int Id { get; set; }
 
-        public int TotalRep { get; set; } = 0;
+        public int Reputation { get; set; } = 0;
         [Required]
-        public string Date { get; set; } =  null!;
+        public DateTime Date { get; set; }
         [Required]
         public string Content { get; set; } = null!;
 
-        public virtual ICollection<Comment> Replies { get; set; }
         [Required]
         public string Owner { get; set; } = null!;
+        [Required]
+        public int ArticleId { get; set; }
+        public int? ParentId { get; set; } = null;
 
- 
-        public Article Article { get; set; } = null!;
     }
 }
