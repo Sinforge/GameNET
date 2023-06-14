@@ -1,17 +1,21 @@
 ﻿using AccountService.Models;
+using Microsoft.Data.SqlClient;
 using Microsoft.EntityFrameworkCore;
+using Npgsql;
+using System.Data;
 
 namespace AccountService.Data
 {
-    public class ApplicationContext : DbContext
-    {
-        public DbSet<User> Users { get; set; }
-        public DbSet<Notification> Notifications { get; set; }
-        public ApplicationContext(DbContextOptions<ApplicationContext> options)
-            : base(options)
+    public class ApplicationContext {
+        private readonly IConfiguration _configuration;
+        private readonly string _connectionString;
+        public ApplicationContext(IConfiguration configuration)
         {
-            Database.EnsureCreated();   // создаем базу данных при первом обращении
+            _configuration = configuration;
+            _connectionString = _configuration.GetConnectionString("DefaultConnection");
         }
+        public IDbConnection CreateConnection()
+            => new NpgsqlConnection(_connectionString);
 
 
     }

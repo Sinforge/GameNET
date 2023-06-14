@@ -21,10 +21,10 @@ public class AccountController : Controller
     private readonly ILogger<AccountController> _logger;
     private readonly IMapper _mapper;
     private readonly IOptions<Audience> _settings;
-    private readonly IMessageReceiver _messageReceiver;
-    public AccountController(IUserRepo userRepo, ILogger<AccountController> logger, IMapper mapper, IOptions<Audience> settings, IMessageReceiver messageReceiver)
+   // private readonly IMessageReceiver _messageReceiver;
+    public AccountController(IUserRepo userRepo, ILogger<AccountController> logger, IMapper mapper, IOptions<Audience> settings) //IMessageReceiver messageReceiver)
     {
-        _messageReceiver = messageReceiver;
+        //_messageReceiver = messageReceiver;
         _settings = settings;
         _userRepo = userRepo;
         _logger = logger;
@@ -42,11 +42,11 @@ public class AccountController : Controller
 
 
     [HttpPost("/Registration")]
-    public ActionResult CreateUser(UserCreateDto userCreateDto, bool isAdmin=false)
+    public async  Task<ActionResult> CreateUser(UserCreateDto userCreateDto, bool isAdmin=false)
     {
 
 
-        User? user = _userRepo.FindByEmailAndId(userCreateDto.Email, userCreateDto.UserId);
+        User? user = await _userRepo.FindByEmailAndId(userCreateDto.Email, userCreateDto.UserId);
         if (user != null)
         {
             _logger.LogInformation("User with such Id or Email exist");
@@ -55,8 +55,7 @@ public class AccountController : Controller
 
         user = _mapper.Map<User>(userCreateDto);
         user.Role = isAdmin ? Role.Admin : Role.DefaultUser;
-        _userRepo.CreateUser(user);
-        _userRepo.SaveChanges();
+        await _userRepo.CreateUser(user);
         _logger.LogInformation("User successful registered");
         return Ok();
     }
@@ -84,7 +83,7 @@ public class AccountController : Controller
     [HttpGet("/login")]
     public async Task<ActionResult> Login(string password, string userId)
     {
-        User user = _userRepo.FindById(userId);
+        User user = await _userRepo.FindById(userId);
         if (user != null && user.Password == password)
         {
 
@@ -137,18 +136,18 @@ public class AccountController : Controller
     [HttpGet]
     [Authorize(Roles= "admin")]
     [Route("/user")]
-    public IActionResult GetUserDataById(string userId)
+    public async Task<IActionResult> GetUserDataById(string userId)
     {
-        return Ok(_userRepo.GetUserDataById(userId));
+        return Ok(await _userRepo.GetUserDataById(userId));
     }
 
 
     [HttpPost]
     [Route("/subscribe")]
-    public IActionResult SubscribeToUser(string userId1, string userId2)
+    public async Task<IActionResult> SubscribeToUser(string userId1, string userId2)
     {
         _logger.LogInformation("subsribing to user");
-        _userRepo.SubsribeToUser(userId1, userId2);
+        await _userRepo.SubsribeToUser(userId1, userId2);
         return Ok();
     }
 }

@@ -12,6 +12,7 @@ builder.Services.AddSwaggerGen(options =>
     var xmlFilename = $"{Assembly.GetExecutingAssembly().GetName().Name}.xml";
     options.IncludeXmlComments(Path.Combine(AppContext.BaseDirectory, xmlFilename));
 });
+
 builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
     .AddJwtBearer(option =>
     {
@@ -33,10 +34,12 @@ builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
 builder.Services.AddAuthorization();
 builder.Services.Configure<AccountService.Controllers.Audience>(builder.Configuration.GetSection("Audience"));
 
-builder.Services.AddDbContext<ApplicationContext>(
-    options => options.UseNpgsql(builder.Configuration.GetConnectionString(name: "DefaultConnection")));
+
+//Dapper
+builder.Services.AddSingleton<ApplicationContext>();
 builder.Services.AddScoped<IUserRepo, UserRepo>();
-builder.Services.AddHostedService<MessageReceiver>();
+// Uncomment after testing
+// builder.Services.AddHostedService<MessageReceiver>();
 builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 builder.Services.AddControllers();
 var app = builder.Build();

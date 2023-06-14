@@ -5,18 +5,18 @@ namespace ArticleService.Data
 {
     public interface IArticleRepo
     {
-        void CreateArticle(Article article);
+        Task CreateArticle(Article article);
 
-        IEnumerable<Article> GetAllArticles();
+        Task<IEnumerable<Article>> GetAllArticles();
 
-        Article? GetArticleById(int id);
+        Task<Article?> GetArticleById(int id);
 
         
-        IEnumerable<Article> GetArticlesByUser(string userId);
-        bool SaveChanges();
+        Task<IEnumerable<Article>> GetArticlesByUser(string userId);
+       Task<bool> SaveChanges();
 
 
-        IEnumerable<Comment> GetCommentsByArticle(int id);
+        Task<IEnumerable<Comment>> GetCommentsByArticle(int id);
 
  
 

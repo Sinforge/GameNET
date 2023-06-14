@@ -31,11 +31,14 @@ builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
         };
     });
 builder.Services.AddAuthorization();
-builder.Services.AddDbContext<ApplicationContext>(
-    options => options.UseNpgsql(builder.Configuration.GetConnectionString(name: "DefaultConnection")));
+
+
+builder.Services.AddSingleton<ApplicationContext>();
 builder.Services.AddScoped<IArticleRepo, ArticleRepo>();
 builder.Services.AddSingleton<IMessageProducer, MessageProducer>();
 builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
+
+
 builder.Services.AddControllers();
 var app = builder.Build();
 if (app.Environment.IsDevelopment())

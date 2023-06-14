@@ -6,19 +6,18 @@ namespace AccountService.Data
 {
     public interface IUserRepo
     {
-        void CreateUser(User user);
-        User FindByEmailAndId(string email, string id);
+        Task CreateUser(User user);
+        Task<User> FindByEmailAndId(string email, string id);
 
-        User FindById(string id);
+        Task<User> FindById(string id);
 
-        IEnumerable<User> GetAllUsers();
+        Task<IEnumerable<User>> GetAllUsers();
 
         Task<User?> GetUserDataById(string id);
-        bool SaveChanges();
 
-        void CreateNotifications(UserCreateArticleEvent createArticleEvent);
+        Task CreateNotifications(UserCreateArticleEvent createArticleEvent);
 
-        void SubsribeToUser(string userId1, string userId2);
+        Task SubsribeToUser(string userId1, string userId2);
 
     }
 }
