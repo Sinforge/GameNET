@@ -21,10 +21,8 @@ public class AccountController : Controller
     private readonly ILogger<AccountController> _logger;
     private readonly IMapper _mapper;
     private readonly IOptions<Audience> _settings;
-   // private readonly IMessageReceiver _messageReceiver;
     public AccountController(IUserRepo userRepo, ILogger<AccountController> logger, IMapper mapper, IOptions<Audience> settings) //IMessageReceiver messageReceiver)
     {
-        //_messageReceiver = messageReceiver;
         _settings = settings;
         _userRepo = userRepo;
         _logger = logger;

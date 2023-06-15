@@ -24,7 +24,7 @@ namespace AccountService.Data
 
             using (var connection = _context.CreateConnection())
             {
-                subscribers = await connection.QueryAsync<int>(selectQuery, createArticleEvent.UserId);
+                subscribers = await connection.QueryAsync<int>(selectQuery, new {publisher = createArticleEvent.UserId });
                 if (subscribers.Any())
                 {
                     connection.Open();

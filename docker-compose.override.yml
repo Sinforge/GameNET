@@ -8,8 +8,8 @@ services:
         container_name: chatservice
         ports:
             - "8090:80"
-
-
+    rabbitmq:
+        container_name: rabbitmq
 
 
 
@@ -20,6 +20,7 @@ services:
             - "8091:80"
 
         depends_on:
+            - rabbitmq
             - articleservice
             - accountservice
             - chatservice
@@ -32,23 +33,22 @@ services:
     articleservice:
         container_name: articleservice
         depends_on:
-         - rabbitmq
-         - article_db
+            - rabbitmq
+            - article_db
         ports:
             - "8088:80"
         environment:
             - ConnectionStrings__DefaultConnection=Server=article_db;Port=5432;Database=articledb;User Id=postgres;Password=postgres;
 
 
-
     accountservice:
+        restart: on-failure
         container_name:  accountservice
+        ports:
+            - "8809:80"
         depends_on:
             - rabbitmq
             - account_db
-        ports:
-            - "8809:80"
- 
         environment:
             - ConnectionStrings__DefaultConnection=Server=account_db;Port=5432;Database=accountdb;User Id=postgres;Password=postgres;
 

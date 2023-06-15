@@ -19,16 +19,16 @@ namespace ArticleService.Controllers
     {
         private readonly ILogger<ArticleController> _logger;
         private readonly IArticleRepo _articleRepo;
-        //private readonly IMessageProducer _messageProducer;
+        private readonly IMessageProducer _messageProducer;
         private readonly IMapper _mapper;
 
-        public ArticleController(ILogger<ArticleController> logger, IArticleRepo articleRepo, IMapper mapper
-            )//IMessageProducer messageProducer)
+        public ArticleController(ILogger<ArticleController> logger, IArticleRepo articleRepo, IMapper mapper, IMessageProducer messageProducer            )
         {
-            //_messageProducer = messageProducer;
+            _messageProducer = messageProducer;
             _mapper = mapper;
             _logger = logger;
             _articleRepo = articleRepo;
+            _messageProducer = messageProducer;
         }
 
         /// <summary>
@@ -37,8 +37,7 @@ namespace ArticleService.Controllers
         [HttpGet]
         [Route("/hello")]
         public ActionResult HelloWorld()
-        {
-            return Content("Hello world");
+        {            return Content("Hello world");
         }
 
         /// <summary>
@@ -61,13 +60,13 @@ namespace ArticleService.Controllers
             var article = _mapper.Map<Article>(articleCreateDto);
             await _articleRepo.CreateArticle(article);
             _logger.LogInformation("Created new article");
-            //_messageProducer.SendMessage<UserCreateArticleEvent>(
-            //    new UserCreateArticleEvent(
-            //        article.Id,
-            //        article.Title,
-            //        article.Owner
-            //        )
-            // );
+            _messageProducer.SendMessage(
+                new UserCreateArticleEvent(
+                    article.Id,
+                    article.Title,
+                    article.Owner
+                    )
+             );
 
             return Ok("Data saved");
 

@@ -6,24 +6,14 @@ networks:
     driver: bridge
 
 services:
-
     rabbitmq:
         image: rabbitmq:3.11-management-alpine
-        container_name: "rabbitmq"
         environment:
             - RABBITMQ_DEFAULT_USER=user
             - RABBITMQ_DEFAULT_PASS=pass
         ports:
           - '5672:5672'
           - '15672:15672'
-    chatservice:
-        image: ${DOCKER_REGISTRY-}chatservice
-        build:
-            context: .
-            dockerfile: ChatService/Dockerfile
-
-
-
     ocelotgateway:
         image: ${DOCKER_REGISTRY-}ocelotgateway
    
@@ -46,7 +36,17 @@ services:
         build:
             context: .
             dockerfile: AccountService/Dockerfile
-        
+            
+    
+    chatservice:
+        image: ${DOCKER_REGISTRY-}chatservice
+        build:
+            context: .
+            dockerfile: ChatService/Dockerfile
+
+
+
+    
     account_db:
         image: postgres
         restart: always

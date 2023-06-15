@@ -1,7 +1,9 @@
 using AccountService.Data;
 using AccountService.Services;
+using FluentMigrator.Runner;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Configuration;
 using Microsoft.IdentityModel.Tokens;
 using System.Reflection;
 using System.Text;
@@ -38,10 +40,18 @@ builder.Services.Configure<AccountService.Controllers.Audience>(builder.Configur
 //Dapper
 builder.Services.AddSingleton<ApplicationContext>();
 builder.Services.AddScoped<IUserRepo, UserRepo>();
+builder.Services.AddSingleton<Database>();
+builder.Services.AddLogging(c => c.AddFluentMigratorConsole())
+        .AddFluentMigratorCore()
+        .ConfigureRunner(c => c.AddPostgres()
+            .WithGlobalConnectionString(builder.Configuration.GetConnectionString("DefaultConnection"))
+            .ScanIn(Assembly.GetExecutingAssembly()).For.Migrations());
 // Uncomment after testing
-// builder.Services.AddHostedService<MessageReceiver>();
+builder.Services.AddHostedService<MessageReceiver>();
 builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 builder.Services.AddControllers();
+
+
 var app = builder.Build();
 if (app.Environment.IsDevelopment())
 {
@@ -49,6 +59,23 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI();
 }
 
+using(var scope = app.Services.CreateScope())
+{
+    var dbService = scope.ServiceProvider.GetRequiredService<Database>();
+    var migrationService = scope.ServiceProvider.GetRequiredService<IMigrationRunner>();
+
+    try
+    {
+        dbService.CreateDatabase("account");
+        migrationService.ListMigrations();
+        migrationService.MigrateUp();
+    }
+    catch
+    {
+        //log errors or ...
+        throw;
+    }
+}
 
 app.UseAuthorization();
 
