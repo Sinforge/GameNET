@@ -28,4 +28,6 @@
     <Folder Include="wwwroot\" />
   </ItemGroup>
 
+  <Import Project="..\Shared\Shared.projitems" Label="Shared" />
+
 </Project>

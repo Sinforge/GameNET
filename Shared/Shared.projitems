@@ -9,10 +9,12 @@
     <Import_RootNamespace>Shared</Import_RootNamespace>
   </PropertyGroup>
   <ItemGroup>
-    <Compile Include="$(MSBuildThisFileDirectory)Extentions\ServiceCollection\AuthServiceCollectionExtentions.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Extentions\ServiceCollection\DatabaseServiceCollectionExtentions.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Extentions\ServiceCollection\ServiceCollectionExtentions.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Extentions\ServiceCollection\SwaggerServiceCollectionExtentions.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Extentions\WebApplication\DatabaseWebApplicationExtentions.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Auth\Audience.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Database\ApplicationContext.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Database\DatabaseManager.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Extentions\AuthServiceCollectionExtentions.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Extentions\DatabaseServiceCollectionExtentions.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Extentions\SwaggerServiceCollectionExtentions.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Extentions\WebApplicationExtentions.cs" />
   </ItemGroup>
 </Project>
