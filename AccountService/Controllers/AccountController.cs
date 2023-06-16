@@ -5,12 +5,11 @@ using AccountService.Dtos;
 using AccountService.Models;
 using Microsoft.Extensions.Options;
 using AutoMapper;
-using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Mvc;
 using System.Text;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.AspNetCore.Authorization;
-using AccountService.Services;
+using Shared.Auth;
 
 namespace AccountService.Controllers;
 
@@ -148,10 +147,4 @@ public class AccountController : Controller
         await _userRepo.SubsribeToUser(userId1, userId2);
         return Ok();
     }
-}
-public class Audience
-{
-    public string Secret { get; set; }
-    public string Iss { get; set; }
-    public string Aud { get; set; }
 }

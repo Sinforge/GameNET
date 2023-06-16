@@ -15,6 +15,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ChatService", "ChatService\
 EndProject
 Project("{54A90642-561A-4BB1-A94E-469ADEE60C69}") = "Client", "Client\Client.esproj", "{CF03E8C5-C9D6-4E38-98B2-94A6FFAE8F26}"
 EndProject
+Project("{D954291E-2A0B-460D-934E-DC6B0785DB48}") = "Shared", "Shared\Shared.shproj", "{A309CDEA-1A80-4788-992F-FF04A7C712F4}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -53,5 +55,8 @@ Global
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {A7368808-91AC-4C3B-B7CC-EE4A35A558D0}
+	EndGlobalSection
+	GlobalSection(SharedMSBuildProjectFiles) = preSolution
+		Shared\Shared.projitems*{a309cdea-1a80-4788-992f-ff04a7c712f4}*SharedItemsImports = 13
 	EndGlobalSection
 EndGlobal

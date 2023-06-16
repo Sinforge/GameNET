@@ -1,8 +1,8 @@
 ﻿using Dapper;
 
-namespace AccountService.Data
+namespace Shared.Database
 {
-    public class Database
+    public class DatabaseManager
     {
         private readonly ApplicationContext _context;
         public Database(ApplicationContext context)

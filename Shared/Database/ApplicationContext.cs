@@ -4,7 +4,7 @@ using Microsoft.EntityFrameworkCore;
 using Npgsql;
 using System.Data;
 
-namespace AccountService.Data
+namespace Shared.Database
 {
     public class ApplicationContext {
         private readonly IConfiguration _configuration;
