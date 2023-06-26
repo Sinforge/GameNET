@@ -15,6 +15,4 @@
 
   <ProjectExtensions><VisualStudio><UserProperties ocelot_1json__JsonSchema="https://bitbucket.org/atlassianlabs/atlascode/raw/main/resources/schemas/pipelines-schema.json" /></VisualStudio></ProjectExtensions>
 
-  <Import Project="..\Shared\Shared.projitems" Label="Shared" />
-
 </Project>

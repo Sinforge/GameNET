@@ -1,14 +1,10 @@
-using System.Reflection;
-using System.Text;
 using ArticleService.Data;
+using ArticleService.Extentions;
 using ArticleService.Services;
-using FluentMigrator.Runner;
-using Microsoft.AspNetCore.Authentication.JwtBearer;
-using Microsoft.IdentityModel.Tokens;
 using Shared.Extentions;
 
 var builder = WebApplication.CreateBuilder(args);
-builder.Services.AddSwagger();
+builder.Services.AddSwagger(builder.Configuration); 
 builder.Services.AddAuth(builder.Configuration);
 
 //extract to extention
@@ -27,8 +23,8 @@ if (app.Environment.IsDevelopment())
     app.UseSwagger();
     app.UseSwaggerUI();
 }
-app.CreateMigrations("articledb");
-
+app.CreateMigrations("article");
+                      
 app.UseAuthorization();
 
 app.MapControllerRoute(

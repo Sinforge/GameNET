@@ -1,12 +1,12 @@
-﻿using Microsoft.Data.SqlClient;
+﻿using AccountService.Models;
+using Microsoft.Data.SqlClient;
 using Microsoft.EntityFrameworkCore;
 using Npgsql;
 using System.Data;
 
-namespace ArticleService.Data
+namespace AccountService.Data
 {
-    public class ApplicationContext
-    {
+    public class ApplicationContext {
         private readonly IConfiguration _configuration;
         private readonly string _connectionString;
         public ApplicationContext(IConfiguration configuration)

@@ -17,8 +17,8 @@ namespace ArticleService.Services
         private readonly IMapper _mapper;
 
 
-        private const string _hostName = "rabbitmq";
-        private const string _userName = "user", _password = "pass";
+        private const string _hostName = "localhost";
+        private const string _userName = "guest", _password = "guest";
         private const string _queueName = "article_account";
         private const string _virtualHost = "/";
 

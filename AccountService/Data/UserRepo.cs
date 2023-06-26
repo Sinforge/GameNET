@@ -18,13 +18,13 @@ namespace AccountService.Data
 
         public async Task CreateNotifications(UserCreateArticleEvent createArticleEvent)
         {
-            var selectQuery = "SELECT subscriber_id FROM public.subscription where user_id = @publisher";
-            var insertQuery = "INSERT INTO public.notification (HtmlText, UserId) VALUES (@content, @receiver)";
-            IEnumerable<int> subscribers;
+            var selectQuery = "SELECT subscriber_id FROM public.subscription where user_id = @user_id";
+            var insertQuery = "INSERT INTO public.notification (\"HtmlText\", \"UserId\") VALUES (@content, @receiver)";
+            IEnumerable<string> subscribers = null;
 
             using (var connection = _context.CreateConnection())
             {
-                subscribers = await connection.QueryAsync<int>(selectQuery, new {publisher = createArticleEvent.UserId });
+                subscribers = await connection.QueryAsync<string>(selectQuery, new { user_id = createArticleEvent.UserId });
                 if (subscribers.Any())
                 {
                     connection.Open();
@@ -41,6 +41,8 @@ namespace AccountService.Data
                         transaction.Commit();
                     }
                 }
+               
+         
 
             }
 

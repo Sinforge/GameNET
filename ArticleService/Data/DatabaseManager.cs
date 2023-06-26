@@ -2,21 +2,20 @@
 
 namespace ArticleService.Data
 {
-    public class Database
+
+    public class DatabaseManager
     {
         private readonly ApplicationContext _context;
-        public Database(ApplicationContext context)
+        public DatabaseManager(ApplicationContext context)
         {
             _context = context;
         }
         public void CreateDatabase(string dbName)
         {
-            var query = "SELECT datname FROM pg_catalog.pg_database WHERE lower(datname) = lower(@name);\r\n";
-            var parameters = new DynamicParameters();
-            parameters.Add("name", dbName);
+            var query = "SELECT datname FROM pg_catalog.pg_database WHERE lower(datname) = lower(@name);";
             using (var connection = _context.CreateConnection())
             {
-                var records = connection.Query(query, parameters);
+                var records = connection.Query(query, new {name = dbName});
                 //create a new database if not exist
                 if (!records.Any())
                     connection.Execute($"CREATE DATABASE {dbName}");

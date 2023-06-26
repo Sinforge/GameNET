@@ -1,12 +1,15 @@
-using AccountService.Infrastructure.Extentions.ServiceCollection;
+using AccountService.Extentions;
+using Microsoft.Extensions.Options;
 using Shared.Extentions;
+using System.Reflection;
 
 var builder = WebApplication.CreateBuilder(args);
 //Add services
-builder.Services.AddSwagger();
+builder.Services.AddSwagger(builder.Configuration);
 builder.Services.AddAuth(builder.Configuration);
 builder.Services.AddDatabase(builder.Configuration);
 builder.Services.AddApplicationServices();
+builder.Services.AddControllers();
 
 var app = builder.Build();
 // If in development add swagger middleware

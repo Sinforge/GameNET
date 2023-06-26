@@ -16,9 +16,9 @@ namespace AccountService.Services
         private IModel _channel;
 
 
-
-        private const string _hostName = "rabbitmq";
-        private const string _userName = "user", _password = "pass";
+        //TODO : extract to configuration file
+        private const string _hostName = "localhost";
+        private const string _userName = "guest", _password = "guest";
         private const string _queueName = "article_account";
         private const string _virtualHost = "/";
 
