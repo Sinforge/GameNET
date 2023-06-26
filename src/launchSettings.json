@@ -1,0 +1,16 @@
+{
+  "profiles": {
+    "Docker Compose": {
+      "commandName": "DockerCompose",
+      "commandVersion": "1.0",
+      "serviceActions": {
+        "account_db": "StartWithoutDebugging",
+        "accountservice": "StartDebugging",
+        "article_db": "StartWithoutDebugging",
+        "articleservice": "StartDebugging",
+        "chatservice": "StartDebugging",
+        "ocelotgateway": "StartDebugging"
+      }
+    }
+  }
+}

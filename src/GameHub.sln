@@ -1,0 +1,93 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.2.32616.157
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{E53339B2-1760-4266-BCC7-CA923CBCF16C}") = "docker-compose", "docker-compose.dcproj", "{67C7CACC-1C01-444E-BE29-819DC0E4AF2A}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{58E786C7-E1B7-475E-A097-A07DCC32B8D5}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Services", "Services", "{325E0463-781C-4566-85A5-56B067FA485A}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "BuildingBlocks", "BuildingBlocks", "{5E496C9A-B8A5-484C-A7B8-25CDA4B8F43F}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Web", "Web", "{3B132C90-8E20-456D-972F-F53E8D3FD137}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "ApiGateway", "ApiGateway", "{0C1C13C2-3C61-4705-86C0-7070A4D0B539}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OcelotGateway", "ApiGateway\OcelotGateway\OcelotGateway.csproj", "{FDA1BA26-D9B9-47B7-9E06-C20E12ACFA93}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AccountService", "Services\AccountService\AccountService.csproj", "{7AB3472E-8881-4FC6-8501-DB58006FE36F}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ArticleService", "Services\ArticleService\ArticleService.csproj", "{7C8236B5-CC36-41ED-A1D7-E8889302F6FD}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ChatService", "Services\ChatService\ChatService.csproj", "{7F574C47-5151-49E6-B15F-3A093D8BD165}"
+EndProject
+Project("{D954291E-2A0B-460D-934E-DC6B0785DB48}") = "Shared", "Services\Shared\Shared.shproj", "{454A6984-2062-49C8-B741-2213B0F83429}"
+EndProject
+Project("{54A90642-561A-4BB1-A94E-469ADEE60C69}") = "Client", "Web\Client\Client.esproj", "{79CFD385-C3B6-47C3-A100-30D093F8039E}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EventBus", "BuildingBlocks\EventBus\EventBus.csproj", "{28A2269B-9991-4EFB-AE5B-8A710C6795E3}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{67C7CACC-1C01-444E-BE29-819DC0E4AF2A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{67C7CACC-1C01-444E-BE29-819DC0E4AF2A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{67C7CACC-1C01-444E-BE29-819DC0E4AF2A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{67C7CACC-1C01-444E-BE29-819DC0E4AF2A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FDA1BA26-D9B9-47B7-9E06-C20E12ACFA93}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FDA1BA26-D9B9-47B7-9E06-C20E12ACFA93}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FDA1BA26-D9B9-47B7-9E06-C20E12ACFA93}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FDA1BA26-D9B9-47B7-9E06-C20E12ACFA93}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7AB3472E-8881-4FC6-8501-DB58006FE36F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7AB3472E-8881-4FC6-8501-DB58006FE36F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7AB3472E-8881-4FC6-8501-DB58006FE36F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7AB3472E-8881-4FC6-8501-DB58006FE36F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7C8236B5-CC36-41ED-A1D7-E8889302F6FD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7C8236B5-CC36-41ED-A1D7-E8889302F6FD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7C8236B5-CC36-41ED-A1D7-E8889302F6FD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7C8236B5-CC36-41ED-A1D7-E8889302F6FD}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7F574C47-5151-49E6-B15F-3A093D8BD165}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7F574C47-5151-49E6-B15F-3A093D8BD165}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7F574C47-5151-49E6-B15F-3A093D8BD165}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7F574C47-5151-49E6-B15F-3A093D8BD165}.Release|Any CPU.Build.0 = Release|Any CPU
+		{79CFD385-C3B6-47C3-A100-30D093F8039E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{79CFD385-C3B6-47C3-A100-30D093F8039E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{79CFD385-C3B6-47C3-A100-30D093F8039E}.Debug|Any CPU.Deploy.0 = Debug|Any CPU
+		{79CFD385-C3B6-47C3-A100-30D093F8039E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{79CFD385-C3B6-47C3-A100-30D093F8039E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{79CFD385-C3B6-47C3-A100-30D093F8039E}.Release|Any CPU.Deploy.0 = Release|Any CPU
+		{28A2269B-9991-4EFB-AE5B-8A710C6795E3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{28A2269B-9991-4EFB-AE5B-8A710C6795E3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{28A2269B-9991-4EFB-AE5B-8A710C6795E3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{28A2269B-9991-4EFB-AE5B-8A710C6795E3}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{325E0463-781C-4566-85A5-56B067FA485A} = {58E786C7-E1B7-475E-A097-A07DCC32B8D5}
+		{5E496C9A-B8A5-484C-A7B8-25CDA4B8F43F} = {58E786C7-E1B7-475E-A097-A07DCC32B8D5}
+		{3B132C90-8E20-456D-972F-F53E8D3FD137} = {58E786C7-E1B7-475E-A097-A07DCC32B8D5}
+		{0C1C13C2-3C61-4705-86C0-7070A4D0B539} = {58E786C7-E1B7-475E-A097-A07DCC32B8D5}
+		{FDA1BA26-D9B9-47B7-9E06-C20E12ACFA93} = {0C1C13C2-3C61-4705-86C0-7070A4D0B539}
+		{7AB3472E-8881-4FC6-8501-DB58006FE36F} = {325E0463-781C-4566-85A5-56B067FA485A}
+		{7C8236B5-CC36-41ED-A1D7-E8889302F6FD} = {325E0463-781C-4566-85A5-56B067FA485A}
+		{7F574C47-5151-49E6-B15F-3A093D8BD165} = {325E0463-781C-4566-85A5-56B067FA485A}
+		{454A6984-2062-49C8-B741-2213B0F83429} = {325E0463-781C-4566-85A5-56B067FA485A}
+		{79CFD385-C3B6-47C3-A100-30D093F8039E} = {3B132C90-8E20-456D-972F-F53E8D3FD137}
+		{28A2269B-9991-4EFB-AE5B-8A710C6795E3} = {5E496C9A-B8A5-484C-A7B8-25CDA4B8F43F}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {A7368808-91AC-4C3B-B7CC-EE4A35A558D0}
+	EndGlobalSection
+	GlobalSection(SharedMSBuildProjectFiles) = preSolution
+		Services\Shared\Shared.projitems*{454a6984-2062-49c8-b741-2213b0f83429}*SharedItemsImports = 13
+		Services\Shared\Shared.projitems*{7ab3472e-8881-4fc6-8501-db58006fe36f}*SharedItemsImports = 5
+		Services\Shared\Shared.projitems*{7c8236b5-cc36-41ed-a1d7-e8889302f6fd}*SharedItemsImports = 5
+	EndGlobalSection
+EndGlobal

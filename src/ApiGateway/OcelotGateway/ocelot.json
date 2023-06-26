@@ -1,0 +1,54 @@
+{
+  "Routes": [
+    {
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "accountservice",
+          "Port": 80
+        }
+      ],
+      // Account service
+      "DownstreamPathTemplate": "/{everything}",
+      "DownstreamScheme": "http",
+      "UpstreamHttpMethod": [ "POST", "GET" ],
+      "UpstreamPathTemplate": "/api/account/{everything}"
+    },
+
+
+
+    // Article service
+    {
+      "DownstreamPathTemplate": "/{everything}",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "articleservice",
+          "Port": 80
+        }
+      ],
+      "UpstreamPathTemplate": "/api/article/{everything}",
+      "UpstreamHttpMethod": [ "POST", "GET" ]
+      
+
+    },
+
+
+    //Chat service
+    {
+      "DownstreamPathTemplate": "/{everything}",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "chatservice",
+          "Port": 80
+        }
+      ],
+      "UpstreamPathTemplate": "/api/chat/{everything}",
+      "UpstreamHttpMethod": [ "POST", "GET" ]
+
+    }
+
+  ]
+
+
+}
