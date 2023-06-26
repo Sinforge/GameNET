@@ -10,11 +10,6 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="$(MSBuildThisFileDirectory)Auth\Audience.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Database\ApplicationContext.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Database\DatabaseManager.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Extentions\AuthServiceCollectionExtentions.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Extentions\DatabaseServiceCollectionExtentions.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Extentions\SwaggerServiceCollectionExtentions.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Extentions\WebApplicationExtentions.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Extentions\CommonServiceCollectionExtentions.cs" />
   </ItemGroup>
 </Project>
