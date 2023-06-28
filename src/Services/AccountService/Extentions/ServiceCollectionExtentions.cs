@@ -1,6 +1,9 @@
 ﻿using AccountService.Data;
 using AccountService.Services;
+using EventBus.Abstractions;
+using EventBusRabbitMQ;
 using FluentMigrator.Runner;
+using RabbitMQ.Client;
 using System.Reflection;
 
 namespace AccountService.Extentions
@@ -10,7 +13,6 @@ namespace AccountService.Extentions
         public static void AddApplicationServices(this IServiceCollection services)
         {
             services.AddScoped<IUserRepo, UserRepo>();
-            services.AddHostedService<MessageReceiver>();
             services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
         }
         public static void AddDatabase(this IServiceCollection services, IConfiguration configuration)
@@ -23,5 +25,6 @@ namespace AccountService.Extentions
                         .WithGlobalConnectionString(configuration.GetConnectionString("DefaultConnection"))
                         .ScanIn(Assembly.GetExecutingAssembly()).For.Migrations());
         }
+        
     }
 }

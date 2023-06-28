@@ -1,5 +1,5 @@
 ﻿using AccountService.Models;
-using ArticleService.IntegrationEvents;
+using AccountService.IntegrationEvents.Events;
 using Microsoft.EntityFrameworkCore;
 using static System.Net.Mime.MediaTypeNames;
 using System;
@@ -16,7 +16,7 @@ namespace AccountService.Data
             _context = context;
         }
 
-        public async Task CreateNotifications(UserCreateArticleEvent createArticleEvent)
+        public async Task CreateNotifications(UserCreateArticleIntegrationEvent createArticleEvent)
         {
             var selectQuery = "SELECT subscriber_id FROM public.subscription where user_id = @user_id";
             var insertQuery = "INSERT INTO public.notification (\"HtmlText\", \"UserId\") VALUES (@content, @receiver)";

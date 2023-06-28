@@ -1,5 +1,6 @@
 using ArticleService.Data;
 using ArticleService.Extentions;
+using ArticleService.IntegrationEvents;
 using ArticleService.Services;
 using Shared.Extentions;
 
@@ -10,9 +11,11 @@ builder.Services.AddAuth(builder.Configuration);
 //extract to extention
 
 builder.Services.AddScoped<IArticleRepo, ArticleRepo>();
-builder.Services.AddScoped<IMessageProducer, MessageProducer>();
 builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 builder.Services.AddControllers();
+
+builder.Services.AddEventBus(builder.Configuration);
+builder.Services.AddTransient<IArticleIntegrationEventService, ArticleIntegrationEventService>();
 
 builder.Services.AddDatabase(builder.Configuration);
 

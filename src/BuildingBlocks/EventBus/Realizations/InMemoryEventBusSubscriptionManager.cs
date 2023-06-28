@@ -161,7 +161,7 @@ namespace EventBus.Realizations
 
         public bool HasSubscriptionsForEvent(string eventName)
         {
-            return _handlers[eventName].Any();
+            return _handlers.ContainsKey(eventName);
         }
 
 

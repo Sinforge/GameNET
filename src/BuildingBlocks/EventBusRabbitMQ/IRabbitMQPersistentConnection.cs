@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace EventBusRabbitMQ
 {
-    internal interface IRabbitMQPersistentConnection : IDisposable
+    public interface IRabbitMQPersistentConnection : IDisposable
     {
         IModel CreateModel();
 

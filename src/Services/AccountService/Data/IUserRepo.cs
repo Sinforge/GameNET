@@ -1,5 +1,5 @@
 ﻿using AccountService.Models;
-using ArticleService.IntegrationEvents;
+using AccountService.IntegrationEvents.Events;
 using Newtonsoft.Json.Bson;
 
 namespace AccountService.Data
@@ -15,7 +15,7 @@ namespace AccountService.Data
 
         Task<User?> GetUserDataById(string id);
 
-        Task CreateNotifications(UserCreateArticleEvent createArticleEvent);
+        Task CreateNotifications(UserCreateArticleIntegrationEvent createArticleEvent);
 
         Task SubsribeToUser(string userId1, string userId2);
 

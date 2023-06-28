@@ -1,7 +1,7 @@
 ﻿using Microsoft.Extensions.Logging;
 namespace EventBusRabbitMQ
 {
-    internal class DefaultRabbitMQPersistentConnection : IRabbitMQPersistentConnection
+    public class DefaultRabbitMQPersistentConnection : IRabbitMQPersistentConnection
     {
         private readonly IConnectionFactory _connectionFactory;
         private readonly ILogger<DefaultRabbitMQPersistentConnection> _logger;

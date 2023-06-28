@@ -1,6 +1,10 @@
-﻿using Microsoft.AspNetCore.Authentication.JwtBearer;
+﻿using EventBus.Abstractions;
+using EventBus.Realizations;
+using EventBusRabbitMQ;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
+using RabbitMQ.Client;
 using Shared.Auth;
 using System.Reflection;
 using System.Text;
@@ -51,6 +55,49 @@ namespace Shared.Extentions
                 });
                 
             });
+        }
+        public static void AddEventBus(this IServiceCollection services, IConfiguration configuration)
+        {
+            var eventBusSection = configuration.GetSection("EventBus");
+            if (!eventBusSection.Exists())
+            {
+                return;
+            }
+            services.AddSingleton<IRabbitMQPersistentConnection>(sp =>
+            {
+                var logger = sp.GetRequiredService<ILogger<DefaultRabbitMQPersistentConnection>>();
+                var factory = new ConnectionFactory()
+                {
+                    HostName = eventBusSection.GetValue<string>("SubscriptionClientName"),
+                    DispatchConsumersAsync = true
+                };
+                if (!string.IsNullOrEmpty(eventBusSection["UserName"]))
+                {
+                    factory.UserName = eventBusSection["UserName"];
+                }
+
+                if (!string.IsNullOrEmpty(eventBusSection["Password"]))
+                {
+                    factory.Password = eventBusSection["Password"];
+                }
+
+                var retryCount = eventBusSection.GetValue("RetryCount", 5);
+
+                return new DefaultRabbitMQPersistentConnection(factory, logger, retryCount);
+            });
+            services.AddSingleton<IEventBus, EventBusRabbitMQ.EventBusRabbitMQ>(sp =>
+            {
+                var subscriptionClientName = eventBusSection.GetValue<string>("SubscriptionClientName");
+                var rabbitMQPersistentConnection = sp.GetRequiredService<IRabbitMQPersistentConnection>();
+                var logger = sp.GetRequiredService<ILogger<EventBusRabbitMQ.EventBusRabbitMQ>>();
+                var eventBusSubscriptionsManager = sp.GetRequiredService<IEventBusSubscriptionManager>();
+                var retryCount = eventBusSection.GetValue("RetryCount", 5);
+
+                return new EventBusRabbitMQ.EventBusRabbitMQ(rabbitMQPersistentConnection, logger, sp, eventBusSubscriptionsManager, subscriptionClientName, retryCount);
+            });
+            services.AddSingleton<IEventBusSubscriptionManager, InMemoryEventBusSubscriptionManager>();
+           
+
         }
 
     }

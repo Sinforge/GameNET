@@ -96,7 +96,7 @@ public class EventBusRabbitMQ : IEventBus, IDisposable
     public void SubscribeDynamic<TH>(string eventName)
         where TH : IDynamicIntegrationEventHandler
     {
-        _logger.LogInformation("Subscribing to dynamic event {EventName} with {EventHandler}", eventName, typeof(TH).GetGenericTypeName());
+        _logger.LogInformation("Subscribing to dynamic event {EventName} with {EventHandler}", eventName, typeof(TH).FullName);
 
         DoInternalSubscription(eventName);
         _subsManager.AddDynamicSubscription<TH>(eventName);
@@ -110,7 +110,7 @@ public class EventBusRabbitMQ : IEventBus, IDisposable
         var eventName = _subsManager.GetEventKey<T>();
         DoInternalSubscription(eventName);
 
-        _logger.LogInformation("Subscribing to event {EventName} with {EventHandler}", eventName, typeof(TH).GetGenericTypeName());
+        _logger.LogInformation("Subscribing to event {EventName} with {EventHandler}", eventName, typeof(TH).FullName);
 
         _subsManager.AddSubscription<T, TH>();
         StartBasicConsume();
