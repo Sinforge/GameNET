@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace EventBus.Abstractions
 {
-    internal interface IEventBusSubscriptionManager
+    public interface IEventBusSubscriptionManager
     {
         bool IsEmpty { get; }
         event EventHandler<string> OnEventRemoved;
