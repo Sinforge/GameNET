@@ -9,13 +9,13 @@ namespace AccountService.IntegrationEvents.Events
         [JsonInclude]
         public int ArticleId { get; set; }
         [JsonInclude]
-        public string ArticleTitle { get; set; } = null!;
+        public string ArticleTitle { get; set; }
         [JsonInclude]
         public string UserId { get; set; }
-
-        public UserCreateArticleIntegrationEvent(int ArtcileId, string ArticleTitle, string UserId)
+        [JsonConstructor]
+        public UserCreateArticleIntegrationEvent(int ArticleId, string ArticleTitle, string UserId)
         {
-            this.ArticleId = ArtcileId;
+            this.ArticleId = ArticleId;
             this.ArticleTitle = ArticleTitle;
             this.UserId = UserId;
         }

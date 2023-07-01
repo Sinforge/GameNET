@@ -16,6 +16,7 @@ namespace AccountService.IntegrationEvents.EventHandlers
 
         public async Task Handle(UserCreateArticleIntegrationEvent @event)
         {
+            // TODO : CHANGE TO LOGGER
             Console.WriteLine($"We received data {@event.Id} {@event.UserId} {@event.ArticleTitle}");
             await _userRepo.CreateNotifications(@event);
         }
