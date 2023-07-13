@@ -22,7 +22,7 @@ export class ArticleComponent {
         }
     
     ngOnInit() {
-        console.log(this.http.get(`http://localhost:8091/api/article/GetArticle/${this.id}`).subscribe({next:(data:any) => {
+        console.log(this.http.get(`http://localhost:5020/GetArticle/${this.id}`).subscribe({next:(data:any) => {
             this.article = data;
         }
     }));

@@ -1,5 +1,5 @@
 
-<form #myForm="ngForm" novalidate (ngSubmit)="onSubmit(myForm)">
+<form novalidate (ngSubmit)="onSubmit(f)" #f="ngForm">
     <div class="form-group">
         <label>Nickname</label>
         <input class="form-control" name="userId" ngModel required />
@@ -18,7 +18,7 @@
             required email />
     </div>
     <div class="form-group">
-        <button [disabled]="myForm.invalid"
-                class="btn btn-default" (click)="submit(myForm)">Register</button>
+        <button [disabled]="f.invalid"
+                class="btn btn-default" (click)="onSubmit(f)">Register</button>
     </div>
 </form>

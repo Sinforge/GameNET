@@ -1,5 +1,5 @@
 import {Component} from "@angular/core"
-import { NgForm } from '@angular/forms';
+import {NgForm} from '@angular/forms';
 import { HttpClient} from '@angular/common/http'
 
 
@@ -15,13 +15,17 @@ export class RegistrationComponent {
     email : string = null!;
 
     onSubmit(form : NgForm) {
-        const body = {
+        let body = {
             userId: this.userId,
             name : this.name,
             password: this.password,
             email : this.email
         };
-        this.http.post("http://localhost:8091/api/account/Registration", body);
+        console.log(body);
+        this.http.post("http://localhost:5117/Registration", body).subscribe({
+            next : (data: any) => {console.log("aaa")},
+            error: error => console.log(error)
+        });
     }
 
 }

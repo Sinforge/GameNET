@@ -5,9 +5,17 @@ using EventBus.Abstractions;
 using Microsoft.Extensions.Options;
 using Shared.Extentions;
 using System.Reflection;
-
+var _myAllowSpecificOrigins = "MyAllowSpecificOrigins";
 var builder = WebApplication.CreateBuilder(args);
 //Add services
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy(name: _myAllowSpecificOrigins,
+        builder =>
+        {
+            builder.WithOrigins("http://localhost:4200");
+        });
+});
 builder.Services.AddSwagger(builder.Configuration);
 builder.Services.AddAuth(builder.Configuration);
 builder.Services.AddDatabase(builder.Configuration);
@@ -25,6 +33,7 @@ if (app.Environment.IsDevelopment())
     app.UseSwagger();
     app.UseSwaggerUI();
 }
+app.UseCors(_myAllowSpecificOrigins);
 app.CreateMigrations("accountdb");
 app.UseAuthorization();
 app.MapControllerRoute(

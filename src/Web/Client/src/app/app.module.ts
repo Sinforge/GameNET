@@ -3,11 +3,11 @@ import { BrowserModule } from '@angular/platform-browser';
 import { HttpClientModule } from '@angular/common/http'
 import { AppComponent } from './app.component';
 import { ArticlesComponent } from './article/list-article.component';
-import {Routes, RouterModule} from '@angular/router'
+import {Routes, RouterModule, RouterOutlet} from '@angular/router'
 import { HomeComponent } from './home/home.component';
 import { NotFoundComponent } from './notfound.component';
 import { ArticleComponent } from './article/article.component';
-import { FormsModule, ReactiveFormsModule }   from '@angular/forms';
+import { FormsModule }   from '@angular/forms';
 import { RegistrationComponent } from './account/registration.component';
 // определение маршрутов
 const appRoutes: Routes =[
@@ -20,13 +20,12 @@ const appRoutes: Routes =[
 ];
 
 @NgModule({
-  declarations: [
-    AppComponent, ArticlesComponent, NotFoundComponent, ArticlesComponent, HomeComponent, RegistrationComponent
-  ],
   imports: [
-    NgModule, BrowserModule, HttpClientModule, RouterModule.forRoot(appRoutes), FormsModule 
+    BrowserModule, HttpClientModule,  RouterModule.forRoot(appRoutes), FormsModule
   ],
-  providers: [],
+  declarations: [
+    AppComponent, ArticlesComponent, NotFoundComponent, HomeComponent, RegistrationComponent
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

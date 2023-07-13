@@ -17,7 +17,7 @@ export class ArticlesComponent {
     constructor(private http: HttpClient){}
     
     ngOnInit() {
-        console.log(this.http.get("http://localhost:8091/api/article/GetAllArticles").subscribe({next:(data:any) => {
+        console.log(this.http.get("http://localhost:5020/GetAllArticles").subscribe({next:(data:any) => {
             this.articles = data;
         }
     }));
