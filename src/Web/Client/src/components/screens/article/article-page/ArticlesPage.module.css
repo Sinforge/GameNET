@@ -1,0 +1,4 @@
+.previewList {
+    display: flex;
+    flex-direction: column;   
+}
