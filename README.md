@@ -6,4 +6,4 @@
 4) Co-op ads
 5) The ability to play some mini-games (mafia, monopoly, etc.)
 6) Create groups between individual users
-7) Use Angular for Client
+7) Use ReactJS for Client
