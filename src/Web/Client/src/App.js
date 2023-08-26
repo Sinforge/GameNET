@@ -1,14 +1,11 @@
-import Main from "./components/Main";
-
+import Router from "./router/Router"
 
 
 function App() {
   return (
     <>
-      <h1>hi</h1>
-      <Main/>
-      {/* <Header></Header>
-      <Footer></Footer> */}
+      <Router/>
+      {/*<Footer></Footer> */}
     </>
   );
 }
